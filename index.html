@@ -1,0 +1,3224 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<title>Teaching and Health Education 📚 | The Coding Nurse (𝒜ℳℋ)🩺💉</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+:root[data-theme="light"] {
+  --primary: #0f4c81;
+  --secondary: #0ea5e9;
+  --success: #22c55e;
+  --danger: #dc2626;
+  --bg: #f1f5f9;
+  --card-bg: #ffffff;
+  --soft: #f8fafc;
+  --text: #0f172a;
+  --border: #e5e7eb;
+  --shadow: rgba(0,0,0,.06);
+}
+:root[data-theme="dark"] {
+  --primary: #38bdf8;
+  --secondary: #0ea5e9;
+  --success: #4ade80;
+  --danger: #f87171;
+  --bg: #0f172a;
+  --card-bg: #1e293b;
+  --soft: #0f172a;
+  --text: #f8fafc;
+  --border: #334155;
+  --shadow: rgba(0,0,0,.3);
+}
+
+*{box-sizing:border-box; font-family:"Segoe UI", system-ui, sans-serif; transition: background 0.3s, color 0.3s;}
+body{margin:0; background:var(--bg); color:var(--text)}
+.container{max-width:1000px; margin:auto; padding:16px; position: relative;}
+
+.top-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  margin-top: -36px;
+  margin-bottom: 26px;
+  position: relative;
+  z-index: 10;
+  width: 100%;
+}
+
+.settings-bar {
+  display: flex;
+  gap: 6px;
+}
+
+.setting-btn, .theme-toggle {
+  background: var(--card-bg);
+  border: 2px solid var(--border);
+  padding: 8px 12px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-weight: bold;
+  color: var(--text);
+  box-shadow: 0 4px 12px var(--shadow);
+  font-size: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+@keyframes popIn {
+  0% { transform: scale(0.95); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-6px); }
+  40%, 80% { transform: translateX(6px); }
+}
+.shake-anim { animation: shake 0.3s ease-in-out; }
+
+.hero{
+  text-align:center;
+  padding:40px 20px 50px 20px;
+  border-radius:24px;
+  background: linear-gradient(135deg, #0f4c81, #0ea5e9);
+  color:#fff;
+  margin-bottom: 20px;
+  animation: popIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 10px 25px rgba(15, 76, 129, 0.2);
+}
+.hero h1{margin:0; font-size:34px; font-weight:800}
+.hero h2{ margin-top:6px; font-size:18px; letter-spacing:2px; text-transform:uppercase; color:#bbf7d0;}
+
+.mid-nav{ display:flex; gap:10px; margin:24px 0; padding:6px 4px; overflow-x:auto;}
+.q-btn{
+  min-width:44px; padding:10px 0; border-radius:12px; border:2px solid var(--border);
+  background:var(--card-bg); color: var(--text); font-weight:700; cursor:pointer; transition: all 0.2s ease;
+}
+.q-btn.active{background:#dbeafe; border-color:var(--secondary); color:#0f4c81; transform: scale(1.1); box-shadow: 0 4px 10px rgba(14, 165, 233, 0.2);}
+.q-btn.correct{background:#dcfce7 !important; border-color:var(--success) !important; color: #16a34a !important;}
+.q-btn.wrong{background:#fee2e2 !important; border-color:var(--danger) !important; color: #dc2626 !important;}
+.q-btn.flagged{border-color: #f59e0b !important; background: #fef3c7 !important; color: #b45309 !important;}
+.q-btn.answered-exam { background: #e2e8f0; border-color: #94a3b8; color: #475569; }
+
+.card{
+  background:var(--card-bg); border-radius:22px; padding:28px;
+  box-shadow:0 14px 35px var(--shadow); text-align: center;
+  animation: popIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  border: 1px solid var(--border);
+}
+
+.welcome-msg { 
+  font-size: 26px; 
+  color: #fff; 
+  font-weight: 800; 
+  margin-bottom: 25px; 
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  padding: 12px 24px;
+  border-radius: 50px;
+  display: inline-block;
+  box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3);
+  letter-spacing: 0.5px;
+}
+
+.salawat-wrapper {
+  margin-bottom: 24px;
+  display: flex;
+  justify-content: center;
+}
+.salawat-card-badge {
+  background: linear-gradient(135deg, rgba(15, 76, 129, 0.08), rgba(14, 165, 233, 0.08));
+  border: 2px dashed var(--primary);
+  color: var(--text);
+  padding: 12px 32px;
+  border-radius: 50px;
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 15px var(--shadow);
+  animation: pulseGlow 2.5s infinite alternate;
+  direction: rtl;
+}
+@keyframes pulseGlow {
+  0% { transform: scale(1); box-shadow: 0 4px 15px var(--shadow); }
+  100% { transform: scale(1.03); box-shadow: 0 6px 22px rgba(14, 165, 233, 0.25); }
+}
+:root[data-theme="dark"] .salawat-card-badge {
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.12), rgba(14, 165, 233, 0.12));
+}
+
+.main-mode-view {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+  margin: 20px 0;
+}
+.main-choice-btn {
+  width: 100%;
+  max-width: 450px;
+  padding: 18px 24px;
+  font-size: 17px;
+  font-weight: 700;
+  border-radius: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  direction: rtl;
+  transition: all 0.25s ease;
+  box-shadow: 0 6px 16px var(--shadow);
+  border: 2px solid var(--border);
+  background: var(--card-bg);
+  color: var(--text);
+}
+.main-choice-btn:hover {
+  transform: translateY(-3px);
+}
+.main-choice-btn.lectures-trigger {
+  border-left: 6px solid var(--primary);
+}
+.main-choice-btn.lectures-trigger:hover {
+  border-color: var(--secondary);
+  box-shadow: 0 8px 24px rgba(14, 165, 233, 0.2);
+}
+.main-choice-btn.exam-trigger {
+  border-left: 6px solid #f59e0b;
+}
+.main-choice-btn.exam-trigger:hover {
+  border-color: #f59e0b;
+  box-shadow: 0 8px 24px rgba(245, 158, 11, 0.25);
+}
+
+.dataset-selector {
+ margin: 0 0 18px 0;
+ display: flex;
+ flex-direction: column;
+ gap: 10px;
+ align-items: center;
+}
+.dataset-title {
+ font-size: 15px;
+ font-weight: 800;
+ color: var(--primary);
+ direction: rtl;
+}
+
+.custom-select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 100%;
+  max-width: 450px;
+  padding: 16px 20px;
+  border-radius: 14px;
+  border: 2px solid var(--border);
+  font-size: 16px;
+  background: var(--soft) url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%2364748b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>') no-repeat;
+  background-position: left 16px center;
+  color: var(--text);
+  font-weight: 700;
+  direction: rtl;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px var(--shadow);
+}
+.custom-select:focus {
+  outline: none;
+  border-color: var(--secondary);
+  box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.15);
+  background-color: var(--card-bg);
+}
+.custom-select option {
+  font-weight: bold;
+  background: var(--card-bg);
+  color: var(--text);
+}
+
+.custom-select option[value="all"] {
+  color: #16a34a;
+  font-weight: 900;
+}
+
+.mode-selector {
+ margin: 20px 0 25px 0;
+ display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
+.mode-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--soft);
+  padding: 14px 20px;
+  border-radius: 14px;
+  border: 2px solid var(--border);
+  cursor: pointer;
+  width: 100%;
+  max-width: 450px;
+  text-align: right;
+  direction: rtl;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+.mode-option input { scale: 1.3; cursor: pointer; margin-left: 10px; }
+.mode-option:hover { border-color: var(--secondary); }
+.mode-option:has(input:checked) {
+  border-color: var(--secondary);
+  background: rgba(14, 165, 233, 0.08);
+}
+
+.start-btn {
+  padding: 16px 50px; font-size: 18px; font-weight: 700; color: #fff;
+  background: linear-gradient(135deg, var(--success), #16a34a); border: none; border-radius: 16px;
+  cursor: pointer; transition: all 0.2s ease; width: 100%; max-width: 450px;
+  display: block; margin: 10px auto;
+}
+.start-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(34, 197, 94, 0.35); }
+
+.back-btn {
+  padding: 12px 30px; font-size: 15px; font-weight: 700; color: var(--text);
+  background: var(--soft); border: 2px solid var(--border); border-radius: 14px;
+  cursor: pointer; transition: all 0.2s; width: 100%; max-width: 450px;
+  display: block; margin: 12px auto;
+}
+.back-btn:hover { background: var(--border); transform: translateY(-1px); }
+
+.resume-btn {
+  padding: 14px 30px; font-size: 16px; font-weight: 700; color: var(--primary);
+  background: transparent; border: 2px solid var(--primary); border-radius: 16px;
+  cursor: pointer; transition: all 0.2s ease; display: none; width: 100%; max-width: 450px;
+  display: block; margin: 12px auto;
+}
+.resume-btn:hover { background: var(--primary); color: #fff; }
+
+.timer-box {
+  display: none;
+  background: var(--card-bg);
+  border: 2px solid var(--border);
+  padding: 8px 20px;
+  border-radius: 50px;
+  font-weight: 800;
+  color: var(--danger);
+  box-shadow: 0 4px 12px var(--shadow);
+  text-align: center;
+  margin: 10px auto 20px auto;
+  width: fit-content;
+  font-size: 18px;
+  letter-spacing: 1px;
+}
+
+.progress{ height:10px; background:var(--border); border-radius:999px; overflow:hidden; margin-bottom:18px;}
+.progress span{
+  display:block; height:100%; width:0%;
+  background:linear-gradient(90deg, var(--secondary), var(--success));
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.question-box{
+  background: var(--soft);
+  border-left:6px solid var(--secondary); border-radius:18px; padding:22px; text-align: left;
+}
+
+.q-tools-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px dashed var(--border);
+}
+.q-badge {
+  background: var(--primary);
+  color: #fff;
+  padding: 4px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: bold;
+}
+.q-actions {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+
+.question { font-size:19px; font-weight:600; line-height: 1.5; width: 100%; display: block; word-wrap: break-word; }
+
+.kw-highlight {
+  background-color: #fef08a;
+  color: #854d0e;
+  padding: 2px 6px;
+  border-radius: 6px;
+  font-weight: 900;
+  text-decoration: underline;
+  text-decoration-color: #ca8a04;
+  text-decoration-thickness: 3px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+:root[data-theme="dark"] .kw-highlight {
+  background-color: #713f12;
+  color: #fef08a;
+  text-decoration-color: #eab308;
+}
+
+#speakBtn, #stopSpeakBtn, #translateBtn { background: none; border: none; font-size: 20px; cursor: pointer; padding: 0; line-height: 1; transition: transform 0.2s; }
+#speakBtn:hover, #stopSpeakBtn:hover, #translateBtn:hover { transform: scale(1.2); }
+
+#flagBtn { background: none; border: none; font-size: 22px; cursor: pointer; padding: 0; line-height: 1; transition: transform 0.2s; filter: grayscale(1); }
+#flagBtn:hover { transform: scale(1.2); }
+#flagBtn.active { filter: grayscale(0) drop-shadow(0 0 4px #f59e0b) !important; transform: scale(1.1); }
+
+.translation-box {
+  display: none;
+  margin-top: 18px;
+  padding: 16px;
+  background: var(--card-bg);
+  border-right: 4px solid var(--secondary);
+  border-radius: 12px;
+  direction: rtl;
+  text-align: right;
+  box-shadow: inset 0 2px 6px var(--shadow), 0 2px 8px var(--shadow);
+  animation: popIn 0.3s ease;
+}
+.trans-title { font-weight: bold; color: var(--secondary); margin-bottom: 8px; font-size: 14px; }
+.trans-q { font-size: 16px; font-weight: 600; margin-bottom: 12px; line-height: 1.5; color: var(--text); }
+.trans-o-list { margin: 0; padding-right: 20px; font-size: 15px; color: #475569; line-height: 1.7; }
+
+.options button{
+  width:100%; padding:16px; margin-bottom:12px; border-radius:14px;
+  border:2px solid var(--border); background:var(--card-bg); color: var(--text);
+  font-size:16px; text-align: left; cursor:pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.options button:not(:disabled):hover {
+  transform: translateY(-2px); border-color: var(--secondary);
+  box-shadow: 0 6px 16px rgba(14, 165, 233, 0.15);
+}
+.options button.correct{background:#ecfdf5 !important; border-color:var(--success) !important; color: #065f46 !important; font-weight: 700;}
+.options button.wrong{background:#fef2f2 !important; border-color:var(--danger) !important; color: #991b1b !important; font-weight: 700;}
+.options button.selected-exam { background: #e0f2fe !important; border-color: var(--secondary) !important; color: #0369a1 !important; font-weight: 700; }
+
+.nav{ display:flex; gap:12px; margin-top:26px;}
+.nav button{
+  flex:1; padding:14px; border-radius:14px; font-size:15px; font-weight:700; cursor:pointer; transition: all 0.2s;
+}
+.prev{background:var(--card-bg); border:2px solid var(--border); color: var(--text);}
+.prev:hover{background: var(--soft); transform: translateY(-1px);}
+.next{ border:none; color:#fff; background:linear-gradient(135deg,var(--primary),var(--secondary));}
+.next:hover{opacity: 0.95; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(15, 76, 129, 0.2);}
+
+.extra-nav { display: flex; gap: 12px; margin-top: 12px; }
+.extra-nav button { flex: 1; padding: 12px; border-radius: 14px; font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+.home-btn { background: var(--card-bg); border: 2px solid var(--border); color: var(--text); }
+.home-btn:hover { background: var(--soft); transform: translateY(-1px); }
+.finish-btn { background: linear-gradient(135deg, var(--danger), #b91c1c); border: none; color: #fff; }
+.finish-btn:hover { opacity: 0.95; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(220, 38, 38, 0.2); }
+
+.result-msg { font-size: 18px; margin-bottom: 10px; line-height: 1.6; }
+.duck-msg { display: block; margin-top: 15px; font-weight: 800; color: var(--primary); font-size: 20px;}
+.stats-container {
+  display: flex; justify-content: space-around; background: var(--soft);
+  padding: 16px; border-radius: 16px; margin: 20px 0; border: 1px solid var(--border);
+}
+.stat-box { text-align: center; }
+.stat-val { font-size: 24px; font-weight: 800; }
+.stat-lbl { font-size: 13px; color: #64748b; margin-top: 4px; }
+.score{ font-size:48px; font-weight:900; color:var(--success); margin: 10px 0; text-shadow: 0 4px 12px rgba(34, 197, 94, 0.2);}
+.badge-title { font-size: 22px; font-weight: 800; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+.result-actions-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 400px;
+  margin: 20px auto 0 auto;
+}
+.restart{
+  padding:14px 28px; border:none; border-radius:16px; font-size:16px; font-weight:700;
+  cursor:pointer; color:#fff; background:linear-gradient(135deg,#0f4c81,#0ea5e9); transition: all 0.2s;
+  width: 100%;
+}
+.restart:hover{transform: translateY(-2px); box-shadow: 0 6px 18px rgba(15, 76, 129, 0.35);}
+
+.review-btn {
+  padding: 14px 28px; border: 2px solid var(--success); border-radius: 16px; font-size: 16px; font-weight: 700;
+  cursor: pointer; color: var(--success); background: transparent; transition: all 0.2s;
+  width: 100%; display: none;
+}
+.review-btn:hover { background: var(--success); color: #fff; transform: translateY(-2px); }
+
+.download-btn {
+  padding: 14px 28px; border: 2px solid var(--primary); border-radius: 16px; font-size: 16px; font-weight: 700;
+  cursor: pointer; color: var(--primary); background: transparent; transition: all 0.2s;
+  width: 100%;
+}
+.download-btn:hover { background: var(--primary); color: #fff; transform: translateY(-2px); }
+</style>
+</head>
+<body>
+
+<div class="container">
+    
+    <div class="hero">
+        <h1>Teaching and Health Education 📚</h1>
+        <h2>Question app</h2>
+        <p>Prepared by <strong>The Coding Nurse (𝒜ℳℋ)🩺💉</strong></p>
+    </div>
+
+    <div class="top-bar">
+        <div class="settings-bar">
+            <button class="setting-btn" id="soundToggle" onclick="toggleSound()"><span>🔊</span> Sound On</button>
+            <button class="setting-btn" id="vibeToggle" onclick="toggleVibration()"><span>📳</span> Vibe On</button>
+        </div>
+        <button class="theme-toggle" onclick="toggleTheme()"><span>🌓</span> Dark Mode</button>
+    </div>
+
+    <div class="card" id="startCard">
+        
+        <div class="salawat-wrapper">
+            <div class="salawat-card-badge">✨ صلي علي النبي 🤍🐣✨</div>
+        </div>
+        
+        <div id="mainModeMenu" class="main-mode-view">
+            <button class="main-choice-btn lectures-trigger" onclick="selectRootMode('lectures')">
+                <span>📌 📚 أسئله علي المحاضرات </span>
+                <span>⬅️</span>
+            </button>
+            <button class="main-choice-btn exam-trigger" onclick="selectRootMode('comprehensive_exam')">
+                <span>📌 🏆 وضع الامتحان الشامل </span>
+                <span>⭐</span>
+            </button>
+        </div>
+
+        <div id="lecturesSetupContainer" style="display: none;">
+            <div id="highScoreView" style="display:none; font-weight:bold; margin:0 auto 16px auto; color:var(--success); font-size:14px; background:rgba(34, 197, 94, 0.08); padding:8px 16px; border-radius:50px; border:1px dashed var(--success); width:fit-content; direction:rtl;">
+                🏆 أعلى سكور: <span id="highScoreVal">0%</span>
+            </div>
+
+            <div class="dataset-selector">
+                <div class="dataset-title">: Choose the lecture first</div>
+                <select id="datasetDrawer" class="custom-select" onchange="setDataset(this.value)">
+                    <option value="place1">1. Introduction to Health Education</option>
+                    <option value="place2">2. Health Education Core Competencies</option>
+                    <option value="place3">3. Methods of Health Education</option>
+                    <option value="place4">4. Teaching and Learning</option>
+                    <option value="place5">5. Communication</option>
+                    <option value="place6">6. Interpersonal Communication</option>
+                    <option value="place7">7. Counseling</option>
+                    <option value="place8">8. Ethical Issues in Health Education</option>
+                    <option value="place9">9. Distance Learning</option>
+                    <option value="place10">10. Telehealth</option>
+                    <option value="place11">11. Learning Domains</option>
+                    <option value="place12">12. Development of Health Education Programs</option>
+                    <option value="place13">13. Example of Health Education Program for Elderly with Diabetes Mellitus</option>
+                </select>
+            </div>
+
+            <div class="mode-selector">
+                <label class="mode-option">
+                    <input type="radio" name="quizMode" value="sequential" onchange="setMode('sequential')">
+                    <span>🔢 وضع الترتيب (أسئلة واختيارات مرتبة بدون عشوائية)</span>
+                </label>
+                <label class="mode-option">
+                    <input type="radio" name="quizMode" value="study" onchange="setMode('study')">
+                    <span>📖 وضع المذاكرة (عشوائي + تصحيح فوري للمعلومات)</span>
+                </label>
+                <label class="mode-option">
+                    <input type="radio" name="quizMode" value="memorize" onchange="setMode('memorize')">
+                    <span>🧠 وضع البصمجة (كشف الإجابة الصحيحه للمراجعه)</span>
+                </label>
+                <label class="mode-option">
+                    <input type="radio" name="quizMode" value="exam" onchange="setMode('exam')">
+                    <span>⏳ وضع الامتحان (عشوائي + تايمر وبدون كشف الإجابات)</span>
+                </label>
+                <label class="mode-option">
+                    <input type="radio" name="quizMode" value="bookmark" onchange="setMode('bookmark')">
+                    <span>🔖 مراجعة الأسئلة المميزة فقط</span>
+                </label>
+            </div>
+
+            <button class="start-btn" onclick="startQuiz()">Start 🚀</button>
+            <button class="back-btn" onclick="selectRootMode('main')">⬅️ العودة للرئيسية</button>
+            <button class="resume-btn" id="resumeBtn" onclick="resumeQuiz()">استكمال محاولة الحل السابقة 🔄</button>
+        </div>
+    </div>
+
+    <div id="quizContainer" style="display:none">
+        <div class="timer-box" id="timerBox">⏳ المتبقي: <span id="timerDisplay">00:00</span></div>
+        <div class="mid-nav" id="midNav"></div>
+        <div class="card" id="quizCard">
+            <div class="progress"><span id="progressBar"></span></div>
+            <div class="question-box">
+                
+                <div class="q-tools-bar">
+                    <span class="q-badge" id="qIndexBadge">Question</span>
+                    <div class="q-actions">
+                        <button id="translateBtn" onclick="toggleTranslation()" title="ترجمة السؤال للعربية" style="display:none;">🌍</button>
+                        <button id="speakBtn" onclick="speakQuestion()" title="بدء النطق من أول وجديد">🔊</button>
+                        <button id="stopSpeakBtn" onclick="toggleSpeechPause()" title="إيقاف مؤقت" style="display:none;">⏸️</button>
+                        <button id="flagBtn" onclick="toggleFlag()" title="Bookmark Question">🔖</button>
+                    </div>
+                </div>
+
+                <div class="question" id="question"></div>
+                
+                <div class="translation-box" id="translationBox">
+                    <div class="trans-title">🎯 الترجمة العربية:</div>
+                    <div class="trans-q" id="transQText"></div>
+                    <ul class="trans-o-list" id="transOList"></ul>
+                </div>
+
+                <div class="options" id="options" style="margin-top: 20px;"></div>
+            </div>
+            
+            <div class="nav">
+                <button class="prev" onclick="prevQ()">⬅ Previous</button>
+                <button class="next" onclick="nextQ()">Next ➡</button>
+            </div>
+            
+            <div class="extra-nav">
+                <button class="home-btn" onclick="goToHome()">🏠 الرئيسية (حفظ)</button>
+                <button class="finish-btn" onclick="showResult()">📊 إنهاء وعرض النتيجة</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="card result" id="resultCard" style="display:none">
+        <div class="result-msg" style="color: var(--primary); font-weight: bold;">✨🤍 صلي علي النبي ✨ </div>
+        <div class="result-msg">
+            متزعلش لو نتيجة حلك مكنتش أحسن حاجه خليك ديما فاكر ان لسه فيه فرصه تحاول سمي الله وحاول تاني
+            <span class="duck-msg">( 🐥 أشطر كتكوت يخواشي )</span>
+        </div>
+        
+        <div class="stats-container">
+            <div class="stat-box">
+                <div class="stat-val" id="statCorrect" style="color: var(--success);">0</div>
+                <div class="stat-lbl">Correct ✅</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-val" id="statWrong" style="color: var(--danger);">0</div>
+                <div class="stat-lbl">Wrong ❌</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-val" id="statRatio" style="color: var(--secondary);">0%</div>
+                <div class="stat-lbl">Accuracy 🎯</div>
+            </div>
+        </div>
+
+        <h2>Final Result</h2>
+        <div class="score" id="scoreText"></div>
+        <div class="badge-title" id="badgeTitle"></div>
+        
+        <div class="result-actions-container">
+            <button class="review-btn" id="reviewBtn" onclick="startReview()">🔁 مراجعة الأخطاء فقط</button>
+            <button class="download-btn" id="downloadBtn" onclick="downloadResultCard()">📸 تحميل النتيجة كصورة</button>
+            <button class="restart" onclick="restartQuiz()">🔄 Restart Quiz</button>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+<script>
+const datasets = {
+  "place1": [
+    {
+      q: "When a profession requires intensive specialized training encompassing biological, environmental, psychological, social, physical, and medical sciences to affect health behaviors and systems, it refers to:",
+      o: [
+        "Clinical hospital administration",
+        "Health education",
+        "Pharmaceutical manufacturing",
+        "Medical insurance auditing"
+      ],
+      a: 1,
+      trQ: "عندما تتطلب مهنة تدريباً متخصصاً مكثفاً يشمل العلوم البيولوجية والبيئية والنفسية والاجتماعية والفيزيائية والطبية للتأثير على السلوكيات والأنظمة الصحية، فإن ذلك يشير إلى:",
+      trO: [
+        "إدارة المستشفيات السريرية",
+        "التثقيف الصحي",
+        "تصنيع الأدوية",
+        "تدقيق التأمين الطبي"
+      ]
+    },
+    {
+      q: "What is the ultimate empowerment objective of developing strategies across individual, group, community, and systemic levels in health education?",
+      o: [
+        "To enforce rigid hospital regulations without patient consent",
+        "To replace professional physicians with community volunteers",
+        "To restrict public access to commercial healthcare facilities",
+        "To empower people to take more control over their personal, community, and environmental health and well-being"
+      ],
+      a: 3,
+      trQ: "ما هو هدف التمكين النهائي لتطوير الاستراتيجيات عبر مستويات الأفراد والمجموعة والمجتمع والأنظمة في التثقيف الصحي؟",
+      trO: [
+        "فرض لوائح مستشفى صارمة دون موافقة المريض",
+        "استبدال الأطباء المحترفين بالمتطوعين المجتمعيين",
+        "تقييد وصول الجمهور إلى مرافق الرعاية الصحية التجارية",
+        "تمكين الناس من التحكم بشكل أكبر في صحتهم الشخصية والمجتمعية والبيئية ورفاهيتهم"
+      ]
+    },
+    {
+      q: "Which of the following best describes the nature of health according to introductory concepts?",
+      o: [
+        "A highly subjective concept that varies according to individual and community expectations and context",
+        "A rigid, universally identical biological measurement",
+        "A fixed legal standard established by penal courts",
+        "An economic calculation based solely on hospital expenditures"
+      ],
+      a: 0,
+      trQ: "أي مما يلي يصف بشكل أفضل طبيعة الصحة وفقاً للمفاهيم التمهيدية؟",
+      trO: [
+        "مفهوم ذاتي للغاية يختلف وفقاً لتوقعات وسياق الأفراد والمجتمع",
+        "قياس بيولوجي جامد ومتطابق عالمياً",
+        "معيار قانوني ثابت تقره محاكم الجنايات",
+        "حساب اقتصادي يعتمد فقط على نفقات المستشفيات"
+      ]
+    },
+    {
+      q: "An individual suffering from a chronic disease or physical disability may still perceive themselves as being in good health under which condition?",
+      o: [
+        "If they completely isolate themselves from public life",
+        "If they receive full financial disability grants from the government",
+        "If they are able to manage their condition so that it does not impact greatly on their quality of life",
+        "If they refuse all forms of ongoing medical therapy"
+      ],
+      a: 2,
+      trQ: "قد يظل الفرد الذي يعاني من مرض مزمن أو إعاقة جسدية يعتبر نفسه في صحة جيدة تحت أي ظرف؟",
+      trO: [
+        "إذا عزل نفسه تماماً عن الحياة العامة",
+        "إذا تلقى منح إعاقة مالية كاملة من الحكومة",
+        "إذا كان قادراً على إدارة حالته بحيث لا تؤثر بشكل كبير على جودة حياته",
+        "إذا رفض جميع أشكال العلاج الطبي المستمر"
+      ]
+    },
+    {
+      q: "The official definition established by the World Health Organization characterizes health as:",
+      o: [
+        "The complete absence of physical pain and anatomical trauma",
+        "A state of complete physical, mental, and social well-being and not merely the absence of disease or infirmity",
+        "The baseline biological survival capacity of an organism",
+        "A temporary phase of emotional and social adjustment"
+      ],
+      a: 1,
+      trQ: "التعريف الرسمي الذي وضعته منظمة الصحة العالمية يصف الصحة بأنها:",
+      trO: [
+        "الغياب التام للألم الجسدي والصدمات التشريحية",
+        "حالة من اكتمال السلامة البدنية والعقلية والاجتماعية وليست مجرد غياب المرض أو العجز",
+        "القدرة الأساسية للبقاء البيولوجي للكائن الحي",
+        "مرحلة مؤقتة للتكيف العاطفي والاجتماعي"
+      ]
+    },
+    {
+      q: "Anatomical integrity and physiological functioning of the body is the direct definition of which core concept?",
+      o: [
+        "Mental health",
+        "Social health",
+        "Physical health",
+        "Wellness"
+      ],
+      a: 2,
+      trQ: "السلامة التشريحية والعمل الوظيفي الفسيولوجي للجسم هو التعريف المباشر لأي مفهوم أساسي؟",
+      trO: [
+        "الصحة العقلية",
+        "الصحة الاجتماعية",
+        "الصحة البدنية",
+        "العافية"
+      ]
+    },
+    {
+      q: "When evaluating whether a person is physically healthy based on body parts, which criteria must be satisfied?",
+      o: [
+        "All body parts must be surgically enhanced for maximum endurance",
+        "The individual must possess extreme athletic speed and agility",
+        "The body must display absolute immunity to all pathogenic bacteria",
+        "All body parts should be there, in natural place and position, without pathology, performing physiological functions properly, and working harmoniously"
+      ],
+      a: 3,
+      trQ: "عند تقييم ما إذا كان الشخص سليماً بدنياً بناءً على أجزاء الجسم، ما هو المعيار الذي يجب استيفاؤه؟",
+      trO: [
+        "يجب تحسين جميع أجزاء الجسم جراحياً لتحقيق أقصى قدر من التحمل",
+        "يجب أن يمتلك الفرد سرعة رياضية فائقة وخفة حركة",
+        "يجب أن يُظهر الجسم مناعة مطلقة لجميع البكتيريا الممرضة",
+        "يجب أن تكون جميع أجزاء الجسم موجودة، في مكانها ووضعها الطبيعي، وخالية من الأمراض، وتؤدي الوظائف الفسيولوجية بشكل صحيح، وتعمل بتناغم"
+      ]
+    },
+    {
+      q: "The ability to learn and think clearly, handle day-to-day events and obstacles, work towards goals, and function effectively in society defines:",
+      o: [
+        "Mental health",
+        "Physical health",
+        "Social health",
+        "Wellness"
+      ],
+      a: 0,
+      trQ: "القدرة على التعلم والتفكير بوضوح، والتعامل مع أحداث وعقبات اليوم، والعمل نحو الأهداف، والعمل بفعالية في المجتمع تحدد:",
+      trO: [
+        "الصحة العقلية",
+        "الصحة البدنية",
+        "الصحة الاجتماعية",
+        "العافية"
+      ]
+    },
+    {
+      q: "What is the core definition of social health in community nursing concepts?",
+      o: [
+        "The frequency of participating in commercial online networks",
+        "Living in an urban environment with high population density",
+        "The ability to make and maintain acceptable interactions with other people",
+        "Having a high socioeconomic status and stable income"
+      ],
+      a: 2,
+      trQ: "ما هو التعريف الأساسي للصحة الاجتماعية في مفاهيم تمريض المجتمع؟",
+      trO: [
+        "تكرار المشاركة في الشبكات التجارية عبر الإنترنت",
+        "العيش في بيئة حضرية ذات كثافة سكانية عالية",
+        "القدرة على إجراء والحفاظ على تفاعلات مقبولة مع الأشخاص الآخرين",
+        "امتلاك وضع اجتماعي واقتصادي مرتفع ودخل مستقر"
+      ]
+    },
+    {
+      q: "The optimal state of health of individuals and groups, involving the realization of fullest physical, psychological, social, spiritual, and economical potential, is known as:",
+      o: [
+        "Disease prevention",
+        "Wellness",
+        "Primary health care",
+        "Clinical recovery"
+      ],
+      a: 1,
+      trQ: "الحالة المثلى للصحة للأفراد والمجموعات، والتي تتضمن تحقيق أقصى إمكانات بدنية ونفسية واجتماعية وروحية واقتصادية، تُعرف باسم:",
+      trO: [
+        "الوقاية من الأمراض",
+        "العافية",
+        "الرعاية الصحية الأولية",
+        "التعافي السريري"
+      ]
+    },
+    {
+      q: "A complex and planned learning experience that aims to bring changes in cognitive, affective, and psychomotor domains of behavior is defined as:",
+      o: [
+        "Health promotion",
+        "Clinical diagnosis",
+        "Primary prevention",
+        "Education"
+      ],
+      a: 3,
+      trQ: "تُعرّف تجربة التعلم المعقدة والمخططة التي تهدف إلى إحداث تغييرات في المجالات المعرفية والوجدانية والحركية للسلوك بأنها:",
+      trO: [
+        "تعزيز الصحة",
+        "التشخيص السريري",
+        "الوقاية الأولية",
+        "التعليم"
+      ]
+    },
+    {
+      q: "Which of the following describes health education as a principle of learning?",
+      o: [
+        "The principle by which individuals and groups of people learn to behave in a manner conducive to the promotion, maintenance, or restoration of health",
+        "A mandatory surgical procedure performed to prevent genetic disorders",
+        "An administrative policy restricting patient visits in public hospitals",
+        "A financial budget plan for purchasing medical equipment"
+      ],
+      a: 0,
+      trQ: "أي مما يلي يصف التثقيف الصحي كمبدأ للتعلم؟",
+      trO: [
+        "المبدأ الذي يتعلم من خلاله الأفراد ومجموعات الناس التصرف بطريقة تؤدي إلى تعزيز الصحة أو الحفاظ عليها أو استعادتها",
+        "إجراء جراحي إلزامي يُجرى للوقاية من الاضطرابات الوراثية",
+        "سياسة إدارية تقيد زيارات المرضى في المستشفيات العامة",
+        "خطة ميزانية مالية لشراء المعدات الطبية"
+      ]
+    },
+    {
+      q: "Which alternative definition accurately describes health education regarding practices and knowledge?",
+      o: [
+        "A strict punitive measure enforced by hospital security against rule breakers",
+        "A commercial advertisement framework for pharmaceutical distribution",
+        "A process which affects changes in the health practices of people and in the knowledge and attitude related to such changes",
+        "A surgical technique used to eradicate chronic infections"
+      ],
+      a: 2,
+      trQ: "أي تعريف بديل يصف بدقة التثقيف الصحي فيما يتعلق بالممارسات والمعرفة؟",
+      trO: [
+        "إجراء عقابي صارم يفرضه أمن المستشفى ضد مخالفي القواعد",
+        "إطار إعلان تجاري لتوزيع الأدوية",
+        "عملية تؤثر على التغييرات في الممارسات الصحية للناس وفي المعرفة والاتجاه المرتبط بهذه التغييرات",
+        "تقنية جراحية تُستخدم للقضاء على العدوى المزمنة"
+      ]
+    },
+    {
+      q: "The process of enabling people to increase control over, and to improve their health through educational and environmental supports is called:",
+      o: [
+        "Surgical intervention",
+        "Health promotion",
+        "Disease treatment",
+        "Symptomatic management"
+      ],
+      a: 1,
+      trQ: "عملية تمكين الناس من زيادة السيطرة على صحتهم وتحسينها من خلال الدعم التعليمي والبيئي تسمى:",
+      trO: [
+        "التدخل الجراحي",
+        "تعزيز الصحة",
+        "علاج الأمراض",
+        "الإدارة العرضية"
+      ]
+    },
+    {
+      q: "Terms such as disease, illness, and sickness generally denote which of the following conditions?",
+      o: [
+        "Optimal physical wellness",
+        "Advanced psychological adaptability",
+        "Successful social integration",
+        "The absence of health"
+      ],
+      a: 3,
+      trQ: "مصطلحات مثل المرض والاعتلال والسقم توضح عموماً أي من الحالات التالية؟",
+      trO: [
+        "العافية البدنية المثلى",
+        "التكيف النفسي المتقدم",
+        "التكامل الاجتماعي الناجح",
+        "غياب الصحة"
+      ]
+    },
+    {
+      q: "What is listed as the first specific objective of health education?",
+      o: [
+        "Increase knowledge of the factors that affect health",
+        "Establish private clinics in every community",
+        "Manufacture low-cost pharmaceutical drugs",
+        "Eliminate all international quarantine barriers"
+      ],
+      a: 0,
+      trQ: "ما هو الهدف المحدد الأول المدرج للتثقيف الصحي؟",
+      trO: [
+        "زيادة المعرفة بالعوامل التي تؤثر على الصحة",
+        "إنشاء عيادات خاصة في كل مجتمع",
+        "تصنيع أدوية صيدلانية منخفضة التكلفة",
+        "القضاء على جميع حواجز الحجر الصحي الدولي"
+      ]
+    },
+    {
+      q: "Among the stages for health education, what represents the ultimate final stage?",
+      o: [
+        "Sensitization",
+        "Publicity",
+        "Community Transformation",
+        "Attitude change"
+      ],
+      a: 2,
+      trQ: "من بين مراحل التثقيف الصحي، ما الذي يمثل المرحلة النهائية القصوى؟",
+      trO: [
+        "التوعية",
+        "الدعاية",
+        "التحول المجتمعي",
+        "تغيير الاتجاه"
+      ]
+    },
+    {
+      q: "What does the first principle of health education dictate regarding program design?",
+      o: [
+        "Programs must be identical across all global populations",
+        "All health education should be need based; the need must be ascertained, specific, and relevant before involving individuals or groups",
+        "Planning is entirely optional if adequate funding exists",
+        "Educators should base programs solely on personal intuition"
+      ],
+      a: 1,
+      trQ: "ماذا يمليه المبدأ الأول للتثقيف الصحي بخصوص تصميم البرامج؟",
+      trO: [
+        "يجب أن تكون البرامج متطابقة عبر جميع التجمعات السكانية العالمية",
+        "يجب أن يكون كل تثقيف صحي مبنياً على الاحتياجات؛ ويجب التأكد من الاحتياجات وتحديدها وكونها ذات صلة قبل إشراك الأفراد أو المجموعات",
+        "التخطيط اختياري تماماً إذا كان هناك تمويل كافٍ",
+        "يجب على المعلمين بناء البرامج بناءً على الحدس الشخصي فقط"
+      ]
+    },
+    {
+      q: "Why is a multidisciplinary approach necessary according to health education principles?",
+      o: [
+        "Because single-discipline programs violate medical codes",
+        "To increase the administrative paperwork burden",
+        "To reduce the number of required community sessions",
+        "Because health education aims at behavior change, which requires understanding human behavior and effective teaching processes"
+      ],
+      a: 3,
+      trQ: "لماذا يُعد النهج متعدد التخصصات ضرورياً وفقاً لمبادئ التثقيف الصحي؟",
+      trO: [
+        "لأن البرامج أحادية التخصص تنتهك القواعد الطبية",
+        "لزيادة عبء الأوراق الإدارية",
+        "لتقليل عدد جلسات المجتمع المطلوبة",
+        "لأن التثقيف الصحي يهدف إلى تغيير السلوك، مما يتطلب فهم السلوك البشري وعمليات التدريس الفعالة"
+      ]
+    },
+    {
+      q: "What is the specific value of two-way communication in health education?",
+      o: [
+        "It helps in getting proper feedback and getting doubts cleared",
+        "It allows educators to lecture continuously without interruption",
+        "It completely eliminates the need for printed brochures",
+        "It speeds up hospital financial auditing processes"
+      ],
+      a: 0,
+      trQ: "ما هي القيمة المحددة للاتصال ثنائي الاتجاه في التثقيف الصحي؟",
+      trO: [
+        "يساعد في الحصول على تغذية راجعة صحيحة وتوضيح الشكوك",
+        "يسمح للمعلمين بإلقاء المحاضرات باستمرار دون انقطاع",
+        "يلغي تماماً الحاجة للكتيبات المطبوعة",
+        "يسرع عمليات التدقيق المالي للمستشفى"
+      ]
+    },
+    {
+      q: "How must a health educator adjust their approach when interacting with illiterates or poor people?",
+      o: [
+        "Use advanced Latin medical jargon to demonstrate expertise",
+        "Avoid direct conversation and rely entirely on automated media",
+        "They have to get down to their level of conversation and human relationships to reduce social distance",
+        "Report them to social welfare agencies instead of teaching"
+      ],
+      a: 2,
+      trQ: "كيف يجب على المثقف الصحي تعديل نهجه عند التفاعل مع الأميين أو الفقراء؟",
+      trO: [
+        "استخدام مصطلحات لاتينية طبية متقدمة لإظهار الخبرة",
+        "تجنب المحادثة المباشرة والاعتماد كلياً على وسائل الإعلام الآلية",
+        "عليه النزول إلى مستوى محادثتهم وعلاقاتهم الإنسانية لتقليل المسافة الاجتماعية",
+        "الإبلاغ عنهم لوكالات الرعاية الاجتماعية بدلاً من التدريس"
+      ]
+    },
+    {
+      q: "According to the 5th principle, health education should provide clients an opportunity to go through what structured stages?",
+      o: [
+        "Registration, examination, diagnosis, and medical prescription",
+        "Identification of problems, planning, implementation, and evaluation",
+        "Funding, marketing, execution, and financial auditing",
+        "Recruitment, training, testing, and institutional graduation"
+      ],
+      a: 1,
+      trQ: "وفقاً للمبدأ الخامس، يجب أن يوفر التثقيف الصحي للعملاء فرصة للمرور بأي مراحل منظمة؟",
+      trO: [
+        "التسجيل والفحص والتشخيص ووصف العلاج الطبي",
+        "تحديد المشكلات، التخطيط، التنفيذ، والتقييم",
+        "التمويل والتسويق والتنفيذ والتدقيق المالي",
+        "التوظيف والتدريب والاختبار والتخرج المؤسسي"
+      ]
+    },
+    {
+      q: "What does the 8th principle state regarding health educators and their credibility?",
+      o: [
+        "They must wear formal clinical attire during all public events",
+        "They only need to possess certified university diplomas",
+        "They must avoid answering difficult questions from clients",
+        "They should not only have correct information on all matters to discuss, but also practice what they profess, otherwise they will not enjoy credibility"
+      ],
+      a: 3,
+      trQ: "ماذا ينص المبدأ الثامن بخصوص المثقفين الصحيين ومصداقيتهم؟",
+      trO: [
+        "يجب أن يرتدوا ملابس سريرية رسمية خلال جميع الفعاليات العامة",
+        "يحتاجون فقط إلى امتلاك شهادات جامعية معتمدة",
+        "يجب عليهم تجنب الإجابة على الأسئلة الصعبة من العملاء",
+        "ألا يكون لديهم المعلومات الصحيحة فحسب في جميع الأمور التي يناقشونها، بل يمارسوا ما يدعون إليه أيضاً، وإلا فلن يتمتعوا بالمصداقية"
+      ]
+    },
+    {
+      q: "What rule does the 11th principle enforce regarding educational terminology?",
+      o: [
+        "Highly scientific jargon should be avoided, and educators should use terms that can be immediately understood",
+        "Educators must speak exclusively in technical medical Latin",
+        "Jargon is mandatory to ensure professional respect",
+        "Clients must translate technical terms independently"
+      ],
+      a: 0,
+      trQ: "ما القاعدة التي يفرضها المبدأ الحادي عشر بخصوص المصطلحات التعليمية؟",
+      trO: [
+        "يجب تجنب المصطلحات العلمية المعقدة للغاية، ويجب على المثقفين استخدام مصطلحات يمكن فهمها فوراً",
+        "يجب على المعلمين التحدث حصرياً باللاتينية الطبية التقنية",
+        "المصطلحات التقنية إجبارية لضمان الاحترام المهني",
+        "يجب على العملاء ترجمة المصطلحات التقنية بشكل مستقل"
+      ]
+    },
+    {
+      q: "An intellectual acquaintance with facts, truth, or principles gained by sight, experience, or report defines which behavior change variable?",
+      o: [
+        "Belief",
+        "Attitude",
+        "Knowledge",
+        "Values"
+      ],
+      a: 2,
+      trQ: "المعرفة الفكرية بالحقائق أو الحقيقة أو المبادئ المكتسبة بالرؤية أو التجربة أو التقرير تُعرّف أي متغير لتغيير السلوك؟",
+      trO: [
+        "الاعتقاد",
+        "الاتجاه",
+        "المعرفة",
+        "القيم"
+      ]
+    },
+    {
+      q: "Acceptance of or confidence in an alleged fact or body of facts as true or right without positive knowledge or proof is known as:",
+      o: [
+        "Knowledge",
+        "Belief",
+        "Value",
+        "Skill"
+      ],
+      a: 1,
+      trQ: "قبول أو الثقة في حقيقة مزعومة أو مجموعة حقائق على أنها صحيحة أو صواب دون معرفة إيجابية أو إثبات يُعرف باسم:",
+      trO: [
+        "المعرفة",
+        "الاعتقاد",
+        "القيمة",
+        "المهارة"
+      ]
+    },
+    {
+      q: "Manner, disposition, feeling, or position toward a person or thing is defined as:",
+      o: [
+        "Value",
+        "Belief",
+        "Knowledge",
+        "Attitude"
+      ],
+      a: 3,
+      trQ: "الأسلوب، أو المزاج، أو الشعور، أو الموقف تجاه شخص أو شيء يُعرّف بأنه:",
+      trO: [
+        "القيمة",
+        "الاعتقاد",
+        "المعرفة",
+        "الاتجاه"
+      ]
+    },
+    {
+      q: "Ideas, ideals, and customs that arouse an emotional response for or against them are called:",
+      o: [
+        "Values",
+        "Attitudes",
+        "Skills",
+        "Beliefs"
+      ],
+      a: 0,
+      trQ: "الأفكار والمثُل والعادات التي تثير استجابة عاطفية لصالحها أو ضدها تُسمى:",
+      trO: [
+        "القيم",
+        "الاتجاهات",
+        "المهارات",
+        "الاعتقادات"
+      ]
+    },
+    {
+      q: "The ability to do something well, arising from talent, training, or practice, defines:",
+      o: [
+        "Knowledge",
+        "Attitude",
+        "Skill",
+        "Belief"
+      ],
+      a: 2,
+      trQ: "القدرة على أداء شيء بشكل جيد، الناشئة عن الموهبة أو التدريب أو الممارسة، تُعرّف:",
+      trO: [
+        "المعرفة",
+        "الاتجاه",
+        "المهارة",
+        "الاعتقاد"
+      ]
+    },
+    {
+      q: "Activities aimed at changing behaviors and promoting preventive actions taken prior to the onset of a disease or injury (such as immunization) fall under:",
+      o: [
+        "Secondary prevention",
+        "Primary prevention",
+        "Tertiary prevention",
+        "Palliative care"
+      ],
+      a: 1,
+      trQ: "الأنشطة الهادفة إلى تغيير السلوكيات وتعزيز الإجراءات الوقائية المتخذة قبل ظهور المرض أو الإصابة (مثل التطعيم) تندرج تحت:",
+      trO: [
+        "الوقاية الثانوية",
+        "الوقاية الأولية",
+        "الوقاية الثالثية",
+        "الرعاية التلطيفية"
+      ]
+    },
+    {
+      q: "What is the primary focus of secondary prevention in health education?",
+      o: [
+        "Preventing diseases before they occur in healthy populations",
+        "Long-term physical and social rehabilitation",
+        "Providing terminal hospice support",
+        "Activities which focus on treatment or actions that block the progression of an injury or disease"
+      ],
+      a: 3,
+      trQ: "ما هو التركيز الأساسي للوقاية الثانوية في التثقيف الصحي؟",
+      trO: [
+        "منع الأمراض قبل حدوثها في التجمعات السليمة",
+        "التأهيل البدني والاجتماعي طويل الأجل",
+        "توفير دعم الرعاية التلطيفية النهائية",
+        "الأنشطة التي تركز على العلاج أو الإجراءات التي توقف تطور الإصابة أو المرض"
+      ]
+    },
+    {
+      q: "Activities designed to promote treatment related to rehabilitation are classified as:",
+      o: [
+        "Tertiary prevention",
+        "Primary prevention",
+        "Secondary prevention",
+        "General health promotion"
+      ],
+      a: 0,
+      trQ: "الأنشطة المصممة لتعزيز العلاج المتعلق بالتأهيل يتم تصنيفها كـ:",
+      trO: [
+        "الوقاية الثالثية",
+        "الوقاية الأولية",
+        "الوقاية الثانوية",
+        "تعزيز الصحة العام"
+      ]
+    },
+    {
+      q: "A deliberate attempt to influence other persons to do what we want them to do, also known as a directive approach, describes:",
+      o: [
+        "The informed decision making approach",
+        "The community empowerment model",
+        "The persuasion approach",
+        "The passive client education method"
+      ],
+      a: 2,
+      trQ: "محاولة متعمدة للتأثير على الأشخاص الآخرين للقيام بما نريدهم أن يفعلوه، والمعروفة أيضاً بالنهج التوجيهي، تصف:",
+      trO: [
+        "نهج صنع القرار المستنير",
+        "نموذج تمكين المجتمع",
+        "نهج الإقناع",
+        "طريقة تعليم العميل السلبي"
+      ]
+    },
+    {
+      q: "Giving people information, problem-solving, and decision-making skills while leaving the actual final choice to the people defines:",
+      o: [
+        "The persuasion approach",
+        "The informed decision making approach",
+        "The directive authoritarian model",
+        "The mandatory compliance protocol"
+      ],
+      a: 1,
+      trQ: "إعطاء الناس المعلومات ومهارات حل المشكلات واتخاذ القرار مع ترك الاختيار الفعلي النهائي للناس يحدد:",
+      trO: [
+        "نهج الإقناع",
+        "نهج صنع القرار المستنير",
+        "النموذج التسلطي التوجيهي",
+        "بروتوكول الامتثال الإلزامي"
+      ]
+    },
+    {
+      q: "According to community development duties, who is primarily responsible for health education?",
+      o: [
+        "Only specialized medical doctors in tertiary hospitals",
+        "Government law enforcement officers and judges",
+        "Licensed commercial pharmacists",
+        "Everyone engaged in health and community development activities"
+      ],
+      a: 3,
+      trQ: "وفقاً لواجبات تنمية المجتمع، من المسؤول الأساسي عن التثقيف الصحي؟",
+      trO: [
+        "الأطباء المتخصصون فقط في مستشفيات المستوى الثالث",
+        "ضباط إنفاذ القانون الحكوميون والقضاة",
+        "الصيادلة التجاريون المرخصون",
+        "كل شخص مشارك في أنشطة الصحة وتنمية المجتمع"
+      ]
+    },
+    {
+      q: "A professionally prepared individual who serves in a variety of roles and is specifically trained to use appropriate educational strategies and methods is a:",
+      o: [
+        "Health educator",
+        "Hospital financial auditor",
+        "Pharmaceutical sales representative",
+        "Clinical laboratory technician"
+      ],
+      a: 0,
+      trQ: "الفرد المُعد مهنياً الذي يعمل في أدوار متنوعة ومُدرب خصيصاً لاستخدام الاستراتيجيات والأساليب التعليمية المناسبة هو:",
+      trO: [
+        "المثقف الصحي",
+        "مدقق مالي للمستشفى",
+        "مندوب مبيعات الأدوية",
+        "فني مختبر سريري"
+      ]
+    },
+    {
+      q: "Talking to people, listening to their problems, and finding reasons for their behaviors falls under which role of a health educator?",
+      o: [
+        "Planning",
+        "Implementation",
+        "Assessment",
+        "Evaluation"
+      ],
+      a: 2,
+      trQ: "التحدث إلى الناس، الاستماع إلى مشاكلهم، وإيجاد أسباب لسلوكياتهم يقع تحت أي دور للمثقف الصحي؟",
+      trO: [
+        "التخطيط",
+        "التنفيذ",
+        "التقييم",
+        "المتابعة والتقويم"
+      ]
+    },
+    {
+      q: "Encouraging people to choose the idea best suited to their circumstances is part of which health educator role?",
+      o: [
+        "Assessment",
+        "Implementation",
+        "Evaluation",
+        "Planning"
+      ],
+      a: 1,
+      trQ: "تشجيع الناس على اختيار الفكرة الأكثر ملاءمة لظروفهم يعتبر جزءاً من أي دور للمثقف الصحي؟",
+      trO: [
+        "التقييم",
+        "التنفيذ",
+        "المتابعة والتقويم",
+        "التخطيط"
+      ]
+    },
+    {
+      q: "What critical consequence may occur if health education is omitted during patient medical treatment?",
+      o: [
+        "The hospital will immediately increase its financial profits",
+        "The patient's clinical recovery rate will double instantly",
+        "Medical staff will experience reduced working hours",
+        "The patient may fall sick again from the same disease"
+      ],
+      a: 3,
+      trQ: "ما هي النتيجة الحرجة التي قد تحدث إذا تم إغفال التثقيف الصحي أثناء العلاج الطبي للمريض؟",
+      trO: [
+        "ستزيد المستشفى أرباحها المالية فوراً",
+        "سيتضاعف معدل التعافي السريري للمريض فوراً",
+        "سيشهد الطاقم الطبي تقليلاً في ساعات العمل",
+        "قد يمرض المريض مرة أخرى بنفس المرض"
+      ]
+    },
+    {
+      q: "Why is personal example emphasized for health workers in educational principles?",
+      o: [
+        "Because their own personal example serves to educate others",
+        "Because it is a strict legal requirement for hospital promotion",
+        "Because it replaces the need for clinical accuracy",
+        "Because it eliminates the need for verbal communication"
+      ],
+      a: 0,
+      trQ: "لماذا يُؤكد على المثال الشخصي للعاملين الصحيين في المبادئ التعليمية؟",
+      trO: [
+        "لأن مثالهم الشخصي يخدم في تثقيف الآخرين",
+        "لأنه متطلب قانوني صارم لترقية المستشفى",
+        "لأنه يحل محل الحاجة للدقة السريرية",
+        "لأنه يلغي الحاجة للتواصل اللفظي"
+      ]
+    },
+    {
+      q: "True or False: Health education is a profession focusing on behaviors, systems, and environments affecting health at a variety of levels.",
+      o: ["False", "True"],
+      a: 1,
+      trQ: "صح أم خطأ: التثقيف الصحي هو مهنة تركز على السلوكيات والأنظمة والبيئات التي تؤثر على الصحة على مستويات مختلفة.",
+      trO: ["خطأ", "صح"]
+    },
+    {
+      q: "True or False: The World Health Organization defines health merely as the physical absence of disease or infirmity.",
+      o: ["True", "False"],
+      a: 1,
+      trQ: "صح أم خطأ: تعرّف منظمة الصحة العالمية الصحة مجرد الغياب البدني للمرض أو العجز.",
+      trO: ["صح", "خطأ"]
+    },
+    {
+      q: "True or False: Physical health refers to anatomical integrity and physiological functioning of the body.",
+      o: ["False", "True"],
+      a: 1,
+      trQ: "صح أم خطأ: تشير الصحة البدنية إلى السلامة التشريحية والعمل الوظيفي الفسيولوجي للجسم.",
+      trO: ["خطأ", "صح"]
+    },
+    {
+      q: "True or False: Health education was introduced as a component of Primary Health Care in the year 1978.",
+      o: ["True", "False"],
+      a: 0,
+      trQ: "صح أم خطأ: تم إدخال التثقيف الصحي كعنصر من عناصر الرعاية الصحية الأولية في عام 1978.",
+      trO: ["صح", "خطأ"]
+    },
+    {
+      q: "True or False: All health education should be need based, and needs must be ascertained before involving individuals or groups.",
+      o: ["False", "True"],
+      a: 1,
+      trQ: "صح أم خطأ: يجب أن يكون كل تثقيف صحي مبنياً على الاحتياجات، ويجب التأكد من الاحتياجات قبل إشراك الأفراد أو المجموعات.",
+      trO: ["خطأ", "صح"]
+    },
+    {
+      q: "True or False: A health educator should use highly scientific jargon to ensure patients are impressed by their medical knowledge.",
+      o: ["True", "False"],
+      a: 1,
+      trQ: "صح أم خطأ: يجب على المثقف الصحي استخدام مصطلحات علمية معقدة لضمان إبهار المرضى بمعرفته الطبية.",
+      trO: ["صح", "خطأ"]
+    },
+    {
+      q: "True or False: Primary prevention activities involve actions taken prior to the onset of a disease or injury, such as immunization.",
+      o: ["False", "True"],
+      a: 1,
+      trQ: "صح أم خطأ: تتضمن أنشطة الوقاية الأولية الإجراءات المتخذة قبل ظهور المرض أو الإصابة، مثل التطعيم.",
+      trO: ["خطأ", "صح"]
+    },
+    {
+      q: "True or False: The persuasion approach in health education relies entirely on letting clients make independent choices without any directive guidance.",
+      o: ["True", "False"],
+      a: 1,
+      trQ: "صح أم خطأ: يعتمد نهج الإقناع في التثقيف الصحي بالكامل على السماح للعملاء باختيارات مستقلة دون أي توجيه.",
+      trO: ["صح", "خطأ"]
+    },
+    {
+      q: "True or False: Without health education, a patient may fall sick again from the same disease.",
+      o: ["False", "True"],
+      a: 1,
+      trQ: "صح أم خطأ: بدون التثقيف الصحي، قد يمرض المريض مرة أخرى بنفس المرض.",
+      trO: ["خطأ", "صح"]
+    },
+    {
+      q: "True or False: Health education is exclusively the responsibility of specialized doctors, and community workers have no role in it.",
+      o: ["True", "False"],
+      a: 1,
+      trQ: "صح أم خطأ: التثقيف الصحي هو مسؤولية الأطباء المتخصصين حصرياً، وليس للعاملين في المجتمع أي دور فيه.",
+      trO: ["صح", "خطأ"]
+    }
+  ],
+  "place2": [],
+  "place3": [
+    {
+      q: "What is the primary definition of health education methods?",
+      o: [
+        "The financial budget allocated for community healthcare campaigns",
+        "The strict legal regulations enforced during hospital admissions",
+        "The techniques or ways in which series of activities are carried out to communicate ideas, information and develops necessary skills and attitude",
+        "The anatomical study of human physiological systems"
+      ],
+      a: 2,
+      trQ: "ما هو التعريف الأساسي لطرق التثقيف الصحي؟",
+      trO: [
+        "الميزانية المالية المخصصة لحملات الرعاية الصحية المجتمعية",
+        "اللوائح القانونية الصارمة التي تُفرض أثناء دخول المستشفى",
+        "التقنيات أو الطرق التي يتم من خلالها تنفيذ سلسلة من الأنشطة لتواصل الأفكار والمعلومات وتطوير المهارات والاتجاهات اللازمة",
+        "الدراسة التشريحية للأنظمة الفسيولوجية البشرية"
+      ]
+    },
+    {
+      q: "How are health education methods classified in the curriculum?",
+      o: [
+        "Primary, secondary, and tertiary methods",
+        "Theoretical, practical, and clinical methods",
+        "Verbal, written, and digital methods",
+        "Individual methods, group methods, and mass methods"
+      ],
+      a: 3,
+      trQ: "كيف يتم تصنيف طرق التثقيف الصحي؟",
+      trO: [
+        "طرق أولية، ثانوية، وثالثية",
+        "طرق نظرية، عملية، وسريرية",
+        "طرق لفظية، مكتوبة، ورقمية",
+        "طرق فردية، طرق جماعية، وطرق جماهيرية"
+      ]
+    },
+    {
+      q: "Individual health education methods primarily involve which type of communication?",
+      o: [
+        "Person-to-person or face-to-face communication providing maximum opportunity for two-way flow",
+        "Mass broadcasting through television and radio",
+        "Written pamphlets distributed without direct interaction",
+        "Large public lectures addressed to hundreds of listeners"
+      ],
+      a: 0,
+      trQ: "طرق التثقيف الصحي الفردي تتضمن أساساً أي نوع من الاتصال؟",
+      trO: [
+        "الاتصال من شخص لشخص أو وجهاً لوجه مما يوفر أقصى فرصة لتدفق ثنائي الاتجاه",
+        "البث الجماهيري من خلال التلفزيون والراديو",
+        "الكتيبات المكتوبة الموزعة دون تفاعل مباشر",
+        "المحاضرات العامة الكبيرة الموجهة لمئات المستمعين"
+      ]
+    },
+    {
+      q: "Which of the following are listed as examples of individual health education methods?",
+      o: [
+        "Brain storming and panel discussion",
+        "Role playing and field trips",
+        "Interview and counseling",
+        "Mini-lecture and demonstration"
+      ],
+      a: 2,
+      trQ: "أي مما يلي يُدرج كأمثلة على طرق التثقيف الصحي الفردي؟",
+      trO: [
+        "العصف الذهني وحلقة النقاش",
+        "لعب الأدوار والرحلات الميدانية",
+        "المقابلة والإرشاد",
+        "المحاضرة المصغرة والعرض العملي"
+      ]
+    },
+    {
+      q: "What is the exact definition of an interview in individual health methods?",
+      o: [
+        "A large public gathering to debate community health laws",
+        "A method of providing health education through the means of question and answer between the health educator and the learner",
+        "An independent reading assignment given to hospital patients",
+        "A broadcasted television program discussing medical symptoms"
+      ],
+      a: 1,
+      trQ: "ما هو التعريف الدقيق للمقابلة في طرق الصحة الفردية؟",
+      trO: [
+        "تجمع عام كبير لمناقشة قوانين الصحة المجتمعية",
+        "طريقة لتوفير التثقيف الصحي من خلال وسائل السؤال والجواب بين المثقف الصحي والمتعلم",
+        "واجب قراءة مستقل يُعطى لمرضى المستشفى",
+        "برنامج تلفزيوني مُذاع يناقش الأعراض الطبية"
+      ]
+    },
+    {
+      q: "Which of the following is considered an advantage of the interview method?",
+      o: [
+        "It can cover a very wide range of target people instantly",
+        "It takes minimal time and requires no preparation",
+        "It eliminates the need for any two-way communication",
+        "Even illiterate persons can be interviewed and taught"
+      ],
+      a: 3,
+      trQ: "أي مما يلي يُعتبر ميزة لمطريقة المقابلة؟",
+      trO: [
+        "يمكنها تغطية نطاق واسع جداً من الأشخاص المستهدفين فوراً",
+        "تستغرق وقتاً ضئيلاً ولا تتطلب أي تحضير",
+        "تلغي الحاجة لأي اتصال ثنائي الاتجاه",
+        "حتى الأشخاص الأميون يمكن مقابلتهم وتعليمهم"
+      ]
+    },
+    {
+      q: "What is noted as a primary disadvantage of the interview method?",
+      o: [
+        "It is highly time consuming and difficult to cover a wide range of target people",
+        "It is completely ineffective for changing personal attitudes",
+        "It does not allow the observation of expressions and gestures",
+        "It can only be conducted using expensive digital computers"
+      ],
+      a: 0,
+      trQ: "ما الذي يُلاحظ كعيب رئيسي لطريقة المقابلة؟",
+      trO: [
+        "تستغرق وقتاً طويلاً جداً ومن الصعب تغطية نطاق واسع من الأشخاص المستهدفين",
+        "غير فعالة تماماً لتغيير الاتجاهات الشخصية",
+        "لا تسمح بملاحظة التعبيرات والإيماءات",
+        "لا يمكن إجراؤها إلا باستخدام حواسيب رقمية مكلفة"
+      ]
+    },
+    {
+      q: "How is counseling defined in health education methods?",
+      o: [
+        "A formal legal trial for individuals breaking health codes",
+        "A mass media broadcast aimed at entire nations",
+        "A process of encouraging and helping an individual in identifying his or her health problem, the cause, the ways of solution, and encourages taking necessary actions",
+        "A written test evaluating medical student grades"
+      ],
+      a: 2,
+      trQ: "كيف يُعرّف الإرشاد في طرق التثقيف الصحي؟",
+      trO: [
+        "محاكمة قانونية رسمية للأفراد المخالفين للقواعد الصحية",
+        "بث عبر وسائل الإعلام الجماهيري موجه لأمم بأكملها",
+        "عملية تشجيع ومساعدة الفرد في تحديد مشكلته الصحية، سببها، طرق حلها، وتشجيع اتخاذ الإجراءات اللازمة",
+        "اختبار كتابي لتقييم درجات طلاب الطب"
+      ]
+    },
+    {
+      q: "What represents an advantage of the counseling method?",
+      o: [
+        "It covers thousands of citizens simultaneously in minutes",
+        "It requires no personal interaction or feedback",
+        "It replaces all forms of clinical medical treatment",
+        "It is helpful in dealing with individual clients and motivates them to take necessary action to solve their health problem"
+      ],
+      a: 3,
+      trQ: "ما الذي يمثل ميزة لطريقة الإرشاد؟",
+      trO: [
+        "تغطي آلاف المواطنين في وقت واحد في دقائق",
+        "لا تتطلب أي تفاعل شخصي أو تغذية راجعة",
+        "تحل محل جميع أشكال العلاج الطبي السريري",
+        "مفيدة في التعامل مع العملاء الأفراد وتحفيزهم على اتخاذ الإجراءات اللازمة لحل مشكلتهم الصحية"
+      ]
+    },
+    {
+      q: "What is a disadvantage associated with counseling?",
+      o: [
+        "Counseling takes a long period of time and is difficult to cover a wide range of people",
+        "It is strictly prohibited for illiterate individuals",
+        "It creates a one-way communication barrier",
+        "It provides zero opportunity for feedback"
+      ],
+      a: 0,
+      trQ: "ما هو العيب المرتبط بالإرشاد؟",
+      trO: [
+        "يستغرق الإرشاد فترة طويلة من الوقت ومن الصعب تغطية نطاق واسع من الناس",
+        "محظور تماماً للأفراد الأميين",
+        "يخلق حاجز اتصال أحادي الاتجاه",
+        "يوفر فرصة صففرية للتغذية الراجعة"
+      ]
+    },
+    {
+      q: "What is the typical ideal size for an educational group in group methods?",
+      o: [
+        "Consist of exactly one hundred members",
+        "Consist of six to twelve members depending upon the situation",
+        "Consist of over five hundred participants",
+        "Consist of only one individual and the educator"
+      ],
+      a: 1,
+      trQ: "ما هو الحجم المثالي النموذجي للمجموعة التعليمية في الطرق الجماعية؟",
+      trO: [
+        "تتكون من مائة عضو بالضبط",
+        "تتكون من ستة إلى اثني عشر عضواً اعتماداً على الموقف",
+        "تتكون من أكثر من خمسمائة مشارك",
+        "تتكون من فرد واحد فقط والمثقف"
+      ]
+    },
+    {
+      q: "Which of the following are listed among the examples of group health education methods?",
+      o: [
+        "Radio and television broadcasting",
+        "Printed posters and pamphlets",
+        "Interview and counseling only",
+        "Demonstration, mini-lecture, brain storming, role playing, workshop, group discussion, panel discussion, and field trip"
+      ],
+      a: 3,
+      trQ: "أي مما يلي مدرج ضمن أمثلة طرق التثقيف الصحي الجماعي؟",
+      trO: [
+        "البث الإذاعي والتلفزيوني",
+        "الملصقات والكتيبات المطبوعة",
+        "المقابلة والإرشاد فقط",
+        "العرض العملي، المحاضرة المصغرة، العصف الذهني، لعب الأدوار، ورشة العمل، مناقشة المجموعة، حلقة النقاش، والرحلة الميدانية"
+      ]
+    },
+    {
+      q: "How is demonstration defined as a group teaching method?",
+      o: [
+        "The process of providing knowledge and skills as well as developing attitude of a small group through the manipulation of appropriate teaching devices or materials",
+        "A written examination testing theoretical chemistry",
+        "A solitary reading session in a private library",
+        "An unguided public tour of a commercial market"
+      ],
+      a: 0,
+      trQ: "كيف يُعرّف العرض العملي كطريقة تدريس جماعية؟",
+      trO: [
+        "عملية توفير المعرفة والمهارات وكذلك تطوير اتجاه مجموعة صغيرة من خلال التلاعب بأجهزة أو مواد التدريس المناسبة",
+        "امتحان كتابي يختبر الكيمياء النظرية",
+        "جلسة قراءة فردية في مكتبة خاصة",
+        "جولة عامة غير موجهة في سوق تجاري"
+      ]
+    },
+    {
+      q: "How long does a typical demonstration take according to the text?",
+      o: [
+        "It must last for exactly five hours without break",
+        "It takes 45 minutes to complete the demonstration though it slightly varies according to the topic",
+        "It takes no more than two minutes total",
+        "It continues indefinitely over several weeks"
+      ],
+      a: 1,
+      trQ: "كم تستغرق جلسة العرض العملي النموذجية وفقاً للنص؟",
+      trO: [
+        "يجب أن تستمر لمدة خمس ساعات بالضبط دون انقطاع",
+        "تستغرق 45 دقيقة لإتمام العرض على الرغم من أنها تختلف قليلاً وفقاً للموضوع",
+        "لا تستغرق أكثر من دقيقتين إجمالاً",
+        "تستمر إلى أجل غير مسمى على مدى عدة أسابيع"
+      ]
+    },
+    {
+      q: "What is the maximum recommended number of learners in a demonstration group?",
+      o: [
+        "Over 1000 participants",
+        "Only 2 members",
+        "About 15 to the maximum",
+        "Exactly 500 learners"
+      ],
+      a: 2,
+      trQ: "ما هو الحد الأقصى الموصى به لعدد المتعلمين في مجموعة العرض العملي؟",
+      trO: [
+        "أكثر من 1000 مشارك",
+        "عضوان فقط",
+        "حوالي 15 كحد أقصى",
+        "500 متعلم بالضبط"
+      ]
+    },
+    {
+      q: "What is a recognized advantage of the demonstration method?",
+      o: [
+        "It requires zero equipment or teaching materials",
+        "It completely eliminates student participation",
+        "It can be completed in under ten seconds",
+        "It is an effective teaching method which involves varied learning experiences like seeing, hearing, feeling, testing and smelling"
+      ],
+      a: 3,
+      trQ: "ما هي الميزة المعترف بها لطريقة العرض العملي؟",
+      trO: [
+        "لا تتطلب أي معدات أو مواد تدريس",
+        "تُلغي تماماً مشاركة الطلاب",
+        "يمكن إتمامها في أقل من عشر ثوانٍ",
+        "إنها طريقة تدريس فعالة تتضمن تجارب تعلم متنوعة مثل الرؤية والسمع والشعور والاختبار والشم"
+      ]
+    },
+    {
+      q: "What is a disadvantage of demonstration?",
+      o: [
+        "Sometimes it may be difficult to get necessary equipment and materials for certain demonstration",
+        "It is always too expensive for international universities",
+        "It works only for teaching advanced mathematics",
+        "It prevents students from asking questions"
+      ],
+      a: 0,
+      trQ: "ما هو عيب العرض العملي؟",
+      trO: [
+        "أحياناً قد يكون من الصعب الحصول على المعدات والمواد اللازمة لعرض معين",
+        "باهظ الثمن دائماً للجامعات الدولية",
+        "يعمل فقط لتدريس الرياضيات المتقدمة",
+        "يمنع الطلاب من طرح الأسئلة"
+      ]
+    },
+    {
+      q: "What is the defined duration of a mini-lecture?",
+      o: [
+        "Exactly one full working day",
+        "Over three hours straight",
+        "In 10 - 15 minutes",
+        "Exactly 60 seconds"
+      ],
+      a: 2,
+      trQ: "ما هي المدة المحددة للمحاضرة المصغرة؟",
+      trO: [
+        "يوم عمل كامل بالضبط",
+        "أكثر من ثلاث ساعات متواصلة",
+        "في غضون 10 - 15 دقيقة",
+        "60 ثانية بالضبط"
+      ]
+    },
+    {
+      q: "What is an advantage of the mini-lecture method?",
+      o: [
+        "It requires no speaker preparation",
+        "Two way communications is maintained between the speaker and audience",
+        "It replaces all practical hospital work",
+        "It eliminates audience concentration"
+      ],
+      a: 1,
+      trQ: "ما هي ميزة طريقة المحاضرة المصغرة؟",
+      trO: [
+        "لا تتطلب أي تحضير من المتحدث",
+        "يتم الحفاظ على الاتصال ثنائي الاتجاه بين المتحدث والجمهور",
+        "تحل محل كل العمل العملي بالمستشفى",
+        "تلغي تركيز الجمهور"
+      ]
+    },
+    {
+      q: "What is a disadvantage of the mini-lecture method?",
+      o: [
+        "The audience feels shy and embarrassed when they cannot answer the questions asked by the speaker",
+        "It takes more than four hours to deliver",
+        "It is only useful for large stadium crowds",
+        "It prohibits any verbal exchange"
+      ],
+      a: 0,
+      trQ: "ما هو عيب طريقة المحاضرة المصغرة؟",
+      trO: [
+        "يشعر الجمهور بالخجل والإحراج عندما لا يستطيعون الإجابة على الأسئلة التي يطرحها المتحدث",
+        "تستغرق أكثر من أربع ساعات للإلقاء",
+        "مفيدة فقط لحشود الملاعب الكبيرة",
+        "تحظر أي تبادل لفظي"
+      ]
+    },
+    {
+      q: "What is another name for brain storming?",
+      o: [
+        "Passive listening",
+        "Creative Ideation",
+        "Clinical surgery",
+        "Strict memorization"
+      ],
+      a: 1,
+      trQ: "ما هو الاسم الآخر للعصف الذهني؟",
+      trO: [
+        "الاستماع السلبي",
+        "التفكير الإبداعي",
+        "الجراحة السريرية",
+        "الحفظ الصارم"
+      ]
+    },
+    {
+      q: "Which of the following is an established rule to be considered when using brain storming?",
+      o: [
+        "Criticize and evaluate every idea immediately",
+        "Contribute only negative comments",
+        "Provide lengthy explanations for every thought",
+        "Don't criticize or evaluate ideas"
+      ],
+      a: 3,
+      trQ: "أي مما يلي يُعد قاعدة راسخة يجب مراعاتها عند استخدام العصف الذهني؟",
+      trO: [
+        "انتقد وقيم كل فكرة فوراً",
+        "ساهم بتعليقات سلبية فقط",
+        "قدم تفسيرات مطولة لكل فكرة",
+        "لا تنتقد أو تقيم الأفكار"
+      ]
+    },
+    {
+      q: "How is role playing described in group educational methods?",
+      o: [
+        "A socio drama which can be carried out by individual or a group of people taking different roles and acting out problem situation similar to that they encounter in their real life situation",
+        "A written final examination paper",
+        "A scientific laboratory chemical experiment",
+        "A silent reading test in a library"
+      ],
+      a: 0,
+      trQ: "كيف يُوصف لعب الأدوار في طرق التعليم الجماعي؟",
+      trO: [
+        "دراما اجتماعية يمكن إجراؤها بواسطة فرد أو مجموعة من الناس يتخذون أدواراً مختلفة ويمثلون موقف مشكلة مشابه لما يواجهونه في حياتهم الواقعية",
+        "ورقة امتحان نهائي كتابي",
+        "تجربة كيميائية معملية علمية",
+        "اختبار قراءة صامتة في مكتبة"
+      ]
+    },
+    {
+      q: "In a role playing session, how many characters and audience members are typically involved?",
+      o: [
+        "Exactly 100 characters and 500 audience",
+        "About 5 to 6 characters and 15-20 audience",
+        "Only 1 character and no audience",
+        "Over 50 characters and 1000 audience"
+      ],
+      a: 1,
+      trQ: "في جلسة لعب الأدوار، كم عدد الشخصيات وأعضاء الجمهور المشاركين عادةً؟",
+      trO: [
+        "100 شخصية و500 متفرج بالضبط",
+        "حوالي 5 إلى 6 شخصيات و15-20 متفرجاً",
+        "شخصية واحدة فقط وبدون جمهور",
+        "أكثر من 50 شخصية و1000 متفرج"
+      ]
+    },
+    {
+      q: "What is an advantage of role playing?",
+      o: [
+        "It guarantees 100% financial profit",
+        "It requires no human actors",
+        "It gives learners opportunity to express their ideas based on real life situation and can learn from each other",
+        "It completely replaces clinical medication"
+      ],
+      a: 2,
+      trQ: "ما هي ميزة لعب الأدوار؟",
+      trO: [
+        "يضمن ربحاً مالياً بنسبة 100%",
+        "لا يتطلب أي ممثلين بشريين",
+        "يمنح المتعلمين الفرصة للتعبير عن أفكارهم بناءً على وضع الحياة الواقعية ويمكنهم التعلم من بعضهم البعض",
+        "يحل محل الدواء السريري تماماً"
+      ]
+    },
+    {
+      q: "What is a disadvantage of role playing?",
+      o: [
+        "Everybody cannot successfully act due to shyness, lack of experience, lack of confidence and expression skills",
+        "It is always completed in under two seconds",
+        "It cannot be performed by human beings",
+        "It requires a computer laboratory"
+      ],
+      a: 0,
+      trQ: "ما هو عيب لعب الأدوار؟",
+      trO: [
+        "لا يستطيع الجميع التمثيل بنجاح بسبب الخجل، نقص الخبرة، نقص الثقة ومهارات التعبير",
+        "يُستكمل دائماً في أقل من ثانتين",
+        "لا يمكن أداؤه بواسطة البشر",
+        "يتطلب مختبر حاسوب"
+      ]
+    },
+    {
+      q: "How many participants does a workshop group typically consist of?",
+      o: [
+        "Exactly 200 participants",
+        "Over 1000 participants",
+        "Only 2 participants",
+        "About 15 participants"
+      ],
+      a: 3,
+      trQ: "من كم مشارك تتكون مجموعة ورشة العمل عادةً؟",
+      trO: [
+        "200 مشارك بالضبط",
+        "أكثر من 1000 مشارك",
+        "مشاركان اثنان فقط",
+        "حوالي 15 مشاركاً"
+      ]
+    },
+    {
+      q: "What is a primary advantage of a workshop?",
+      o: [
+        "Users are usually very motivated and have flexibility over length and frequency of sessions",
+        "It requires zero organization or planning",
+        "It eliminates all need for discussion",
+        "It takes only one second to execute"
+      ],
+      a: 0,
+      trQ: "ما هي الميزة الرئيسية لورشة العمل؟",
+      trO: [
+        "المستخدمون عادة متحمسون للغاية ولديهم مرونة في طول وتكرار الجلسات",
+        "لا تتطلب أي تنظيم أو تخطيط",
+        "تلغي كل حاجة للنقاش",
+        "تستغرق ثانية واحدة فقط للتنفيذ"
+      ]
+    },
+    {
+      q: "What is a disadvantage of a workshop?",
+      o: [
+        "It is prohibited for professional nurses",
+        "Handling large classes for hands-on practice may be difficult and users attending may have a broad range of skills",
+        "It prevents any participant interaction",
+        "It is exclusively conducted online"
+      ],
+      a: 1,
+      trQ: "ما هو عيب ورشة العمل؟",
+      trO: [
+        "محظورة على الممرضين المهنيين",
+        "التعامل مع الفصول الكبيرة للممارسة العملية قد يكون صعباً والمستخدمون الحاضرون قد يكون لديهم نطاق واسع من المهارات",
+        "تمنع أي تفاعل للمشاركين",
+        "تُعقد حصرياً عبر الإنترنت"
+      ]
+    },
+    {
+      q: "What is the maximum time limit specified for any group discussion to avoid boredom?",
+      o: [
+        "Every discussion must last for 24 continuous hours",
+        "A discussion must last exactly one week",
+        "Discussions should be limited to 30 seconds",
+        "Any discussion should take only an hour or less to avoid boredom"
+      ],
+      a: 3,
+      trQ: "ما هو الحد الأقصى للوقت المحدد لأي مناقشة جماعية لتجنب الملل؟",
+      trO: [
+        "كل مناقشة يجب أن تستمر لمدة 24 ساعة متواصلة",
+        "يجب أن تستمر المناقشة أسبوعاً كاملاً بالضبط",
+        "يجب أن تقتصر المناقشات على 30 ثانية",
+        "يجب أن تستغرق أي مناقشة ساعة واحدة أو أقل لتجنب الملل"
+      ]
+    },
+    {
+      q: "What is an advantage of group discussion?",
+      o: [
+        "Develops creativity, confidence and ability of judgment in the members or learners",
+        "It requires no active member participation",
+        "It guarantees instantaneous solutions without debate",
+        "It eliminates the need for a health educator"
+      ],
+      a: 0,
+      trQ: "ما هي ميزة المناقشة الجماعية؟",
+      trO: [
+        "تطور الإبداع والثقة والقدرة على الحكم لدى الأعضاء أو المتعلمين",
+        "لا تتطلب مشاركة نشطة للأعضاء",
+        "تضمن حلولاً فورية دون نقاش",
+        "تلغي الحاجة لمثقف صحي"
+      ]
+    },
+    {
+      q: "What is a disadvantage of group discussion?",
+      o: [
+        "It is impossible to conduct in human societies",
+        "Some self-conscious members may not venture to bring forth their valid idea for fear of disapproval by other members",
+        "It forces all participants to remain silent",
+        "It requires a computerized grading system"
+      ],
+      a: 1,
+      trQ: "ما هو عيب المناقشة الجماعية؟",
+      trO: [
+        "من المستحيل إجراؤها في المجتمعات البشرية",
+        "بعض الأعضاء الواعين بأنفسهم قد لا يجرؤون على طرح فكرتهم الصحيحة خوفاً من عدم الموافقة من الأعضاء الآخرين",
+        "تجبر جميع المشاركين على البقاء صامتين",
+        "تتطلب نظام درجات محوسب"
+      ]
+    },
+    {
+      q: "How many panel members typically participate in a panel discussion?",
+      o: [
+        "Exactly 50 experts",
+        "Only 1 expert",
+        "A group of experts normally 3 or 4 persons",
+        "Over 100 experts"
+      ],
+      a: 2,
+      trQ: "كم عدد أعضاء حلقة النقاش المشاركين عادةً؟",
+      trO: [
+        "50 خبيراً بالضبط",
+        "خبير واحد فقط",
+        "مجموعة من الخبراء عادة 3 أو 4 أشخاص",
+        "أكثر من 100 خبير"
+      ]
+    },
+    {
+      q: "What is an advantage of a panel discussion?",
+      o: [
+        "Provides varied knowledge, ideas and experiences about the subject of concern to the learners",
+        "It is completely silent and requires no listening",
+        "It replaces all practical hospital training",
+        "It guarantees zero audience attention"
+      ],
+      a: 0,
+      trQ: "ما هي ميزة حلقة النقاش؟",
+      trO: [
+        "توفر معرفة وأفكاراً وخبرات متنوعة حول موضوع الاهتمام للمتعلمين",
+        "صامتة تماماً ولا تتطلب أي استماع",
+        "تحل محل كل التدريب العملي بالمستشفى",
+        "تضمن انعدام انتباه الجمهور"
+      ]
+    },
+    {
+      q: "What is a disadvantage of a panel discussion?",
+      o: [
+        "It is too expensive for government hospitals",
+        "It prohibits audience questions completely",
+        "It requires no preparation",
+        "Sometimes it is difficult to get the appropriate experts and difficult to set definite time to suit the experts"
+      ],
+      a: 3,
+      trQ: "ما هو عيب حلقة النقاش؟",
+      trO: [
+        "باهظة الثمن جداً للمستشفيات الحكومية",
+        "تحظر أسئلة الجمهور تماماً",
+        "لا تتطلب أي تحضير",
+        "أحياناً يكون من الصعب الحصول على الخبراء المناسبين ومن الصعب تحديد وقتاً محددأ يناسب الخبراء"
+      ]
+    },
+    {
+      q: "How is a field trip defined in health education?",
+      o: [
+        "A planned visit to a place away from normal environment to provide practical knowledge in real situation",
+        "A written exam taken inside a closed classroom",
+        "A surgical operation performed in an emergency ward",
+        "A textbook reading assignment"
+      ],
+      a: 0,
+      trQ: "كيف يُعرّف الرحلة الميدانية في التثقيف الصحي؟",
+      trO: [
+        "زيارة مخططة لمكان بعيد عن البيئة العادية لتوفير المعرفة العملية في وضع حقيقي",
+        "امتحان كتابي يُؤخذ داخل فصل مغلق",
+        "عملية جراحية تُجرى في جناح الطوارئ",
+        "واجب قراءة من كتاب مدرسي"
+      ]
+    },
+    {
+      q: "What is an advantage of a field trip?",
+      o: [
+        "It requires no travel or movement",
+        "The trip itself is fun and creates a bond among those taking part, going where experts are, and can learn a lot",
+        "It can be completed in zero minutes",
+        "It eliminates all practical learning"
+      ],
+      a: 1,
+      trQ: "ما هي ميزة الرحلة الميدانية؟",
+      trO: [
+        "لا تتطلب أي سفر أو حركة",
+        "الرحلة نفسها ممتعة وتخلق رابطة بين المشاركين، وتذهب حيث يوجد الخبراء، ويمكنهم تعلم الكثير",
+        "يمكن إتمامها في صفر من الدقائق",
+        "تلغي كل التعلم العملي"
+      ]
+    },
+    {
+      q: "What is a disadvantage of a field trip?",
+      o: [
+        "An unfocussed trip can be a waste of time, they cost money, and take a lot of organization and effort",
+        "It is always boring and lacks any educational value",
+        "It is legally forbidden in health education",
+        "It prevents students from seeing real environments"
+      ],
+      a: 0,
+      trQ: "ما هو عيب الرحلة الميدانية؟",
+      trO: [
+        "الرحلة غير الممركزة يمكن أن تكون إهداراً للوقت، وتكلف مالاً، وتتطلب الكثير من التنظيم والجهد",
+        "مملة دائماً وتفتقر لأي قيمة تعليمية",
+        "محظورة قانوناً في التثقيف الصحي",
+        "تمنع الطلاب من رؤية البيئات الحقيقية"
+      ]
+    },
+    {
+      q: "Mass methods of health education are specially meant for which type of audience?",
+      o: [
+        "A single isolated patient in a hospital room",
+        "A large number of heterogeneous people, commonly termed as mass",
+        "Exactly three medical experts",
+        "Only registered university professors"
+      ],
+      a: 1,
+      trQ: "طرق التثقيف الصحي الجماهيري مخصصة خصيصاً لأي نوع من الجمهور؟",
+      trO: [
+        "مريض واحد معزول في غرفة مستشفى",
+        "عدد كبير من الناس غير المتجانسين، وغالباً ما يُطلق عليهم اسم الكتلة أو الجماهير",
+        "ثلاثة خبراء طبيين فقط",
+        "أساتذة الجامعات المسجلون فقط"
+      ]
+    },
+    {
+      q: "How are mass health education methods classified according to learning aids?",
+      o: [
+        "Primary, secondary, and tertiary aids",
+        "Written, verbal, and digital aids only",
+        "Clinical, surgical, and pharmaceutical aids",
+        "Audio Aids, Visual Aids, and Audio-visual aids"
+      ],
+      a: 3,
+      trQ: "كيف يتم تصنيف طرق التثقيف الصحي الجماهيري وفقاً لوسائل التعلم؟",
+      trO: [
+        "وسائل أولية، ثانوية، وثالثية",
+        "وسائل مكتوبة، لفظية، ورقمية فقط",
+        "وسائل سريرية، جراحية، وصيدلانية",
+        "الوسائل السمعية، الوسائل البصرية، والوسائل السمعية البصرية"
+      ]
+    },
+    {
+      q: "True or False: Methods of health education are the techniques or ways in which series of activities are carried out to communicate ideas, information and develop necessary skills and attitude.",
+      o: ["False", "True"],
+      a: 1,
+      trQ: "صح أم خطأ: طرق التثقيف الصحي هي التقنيات أو الطرق التي يتم من خلالها تنفيذ سلسلة من الأنشطة لتواصل الأفكار والمعلومات وتطوير المهارات والاتجاهات اللازمة.",
+      trO: ["خطأ", "صح"]
+    },
+    {
+      q: "True or False: Individual health education methods involve person-to-person or face-to-face communication.",
+      o: ["False", "True"],
+      a: 1,
+      trQ: "صح أم خطأ: طرق التثقيف الصحي الفردي تتضمن الاتصال من شخص لشخص أو وجهاً لوجه.",
+      trO: ["خطأ", "صح"]
+    },
+    {
+      q: "True or False: The interview method cannot be used with illiterate persons under any circumstances.",
+      o: ["True", "False"],
+      a: 0,
+      trQ: "صح أم خطأ: لا يمكن استخدام طريقة المقابلة مع الأشخاص الأميين تحت أي ظرف من الظروف.",
+      trO: ["صح", "خطأ"]
+    },
+    {
+      q: "True or False: An ideal group may consist of six to twelve members depending upon the situation.",
+      o: ["False", "True"],
+      a: 1,
+      trQ: "صح أم خطأ: المجموعة المثالية قد تتكون من ستة إلى اثني عشر عضواً اعتماداً على الموقف.",
+      trO: ["خطأ", "صح"]
+    },
+    {
+      q: "True or False: A demonstration usually takes 45 minutes to complete though it slightly varies according to the topic.",
+      o: ["False", "True"],
+      a: 1,
+      trQ: "صح أم خطأ: يستغرق العرض العملي عادة 45 دقيقة للإتمام على الرغم من أنها تختلف قليلاً وفقاً للموضوع.",
+      trO: ["خطأ", "صح"]
+    },
+    {
+      q: "True or False: A mini-lecture is the method of giving information with the help of short lecture or speech in 10 - 15 minutes.",
+      o: ["False", "True"],
+      a: 1,
+      trQ: "صح أم خطأ: المحاضرة المصغرة هي طريقة إعطاء المعلومات بمساعدة محاضرة أو خطبة قصيرة في غضون 10 - 15 دقيقة.",
+      trO: ["خطأ", "صح"]
+    },
+    {
+      q: "True or False: Brain storming is a modern method of eliciting from the participants their ideas and solutions on debatable issues or current problems.",
+      o: ["False", "True"],
+      a: 1,
+      trQ: "صح أم خطأ: العصف الذهني هو طريقة حديثة لاستخلاص أفكار وحلول المشاركين حول القضايا القابلة للنقاش أو المشكلات الحالية.",
+      trO: ["خطأ", "صح"]
+    },
+    {
+      q: "True or False: A workshop group may consist of about 500 participants.",
+      o: ["True", "False"],
+      a: 0,
+      trQ: "صح أم خطأ: مجموعة ورشة العمل قد تتكون من حوالي 500 مشارك.",
+      trO: ["صح", "خطأ"]
+    },
+    {
+      q: "True or False: Panel members in a panel discussion are normally a group of experts consisting of 3 or 4 persons.",
+      o: ["False", "True"],
+      a: 1,
+      trQ: "صح أم خطأ: أعضاء اللجنة في حلقة النقاش هم عادة مجموعة من الخبراء تتكون من 3 أو 4 أشخاص.",
+      trO: ["خطأ", "صح"]
+    },
+    {
+      q: "True or False: Mass methods of health education are specially meant for a large number of heterogeneous people termed as mass.",
+      o: ["False", "True"],
+      a: 1,
+      trQ: "صح أم خطأ: طرق التثقيف الصحي الجماهيري مخصصة خصيصاً لعدد كبير من الناس غير المتجانسين المسمى بالجماهير.",
+      trO: ["خطأ", "صح"]
+    }
+  ],
+  "place4": [],
+  "place5": [
+    {
+      q: "What is considered the key to changing people's health behavior?",
+      o: [
+        "Clinical surgery",
+        "Effective communication",
+        "Hospital financial management",
+        "Pharmaceutical manufacturing"
+      ],
+      a: 1,
+      trQ: "ما الذي يُعتبر المفتاح لتغيير سلوكيات الناس الصحية؟",
+      trO: [
+        "الجراحة السريرية",
+        "التواصل الفعال",
+        "الإدارة المالية للمستشفيات",
+        "تصنيع الأدوية"
+      ]
+    },
+    {
+      q: "How is communication formally defined?",
+      o: [
+        "It is a two-way process of reaching mutual understanding, involving sending and receiving message and receiving feedback",
+        "It is a strict legal procedure enforced by hospital authorities",
+        "It is the physical movement of patients between hospital departments",
+        "It is the statistical calculation of community mortality rates"
+      ],
+      a: 0,
+      trQ: "كيف يُعرّف التواصل رسمياً؟",
+      trO: [
+        "إنه عملية ثنائية الاتجاه للوصول إلى التفاهم المتبادل، وتتضمن إرسال واستقبال الرسائل وتلقي التغذية الراجعة",
+        "إنه إجراء قانوني صارم تفرضه سلطات المستشفى",
+        "إنه الحركة الجسدية للمرضى بين أقسام المستشفى",
+        "إنه الحساب الإحصائي لمعدلات الوفيات المجتمعية"
+      ]
+    },
+    {
+      q: "What percentage of all communication is verbal versus nonverbal?",
+      o: [
+        "50% verbal and 50% nonverbal",
+        "90% verbal and 10% nonverbal",
+        "10% of all communication is verbal and 90% is nonverbal",
+        "100% verbal with zero nonverbal"
+      ],
+      a: 2,
+      trQ: "ما هي النسبة المئوية لكل من التواصل اللفظي وغير اللفظي؟",
+      trO: [
+        "50% لفظي و 50% غير لفظي",
+        "90% لفظي و 10% غير لفظي",
+        "10% من إجمالي التواصل هو لفظي و 90% غير لفظي",
+        "100% لفظي بدون أي غير لفظي"
+      ]
+    },
+    {
+      q: "What is verbal communication defined as?",
+      o: [
+        "The use of words to express thoughts, feeling, and attitude",
+        "Communication exclusively through physical body movements and gestures",
+        "The transmission of data using electronic computers",
+        "Written administrative reports filed in hospital archives"
+      ],
+      a: 0,
+      trQ: "كيف يُعرّف التواصل اللفظي؟",
+      trO: [
+        "استخدام الكلمات للتعبير عن الأفكار والمشاعر والاتجاهات",
+        "التواصل حصرياً من خلال حركات الجسم الجسدية والإيماءات",
+        "نقل البيانات باستخدام الحواسيب الإلكترونية",
+        "التقارير الإدارية المكتوبة المحفوظة في أرشيف المستشفى"
+      ]
+    },
+    {
+      q: "Which technique uses direct statements regarding facts, providing clear and concise information that elderly people can understand?",
+      o: [
+        "Open ended technique",
+        "Direct questioning",
+        "Informing",
+        "Active listening"
+      ],
+      a: 2,
+      trQ: "أي تقنية تستخدم عبارات مباشرة بخصوص الحقائق، وتوفر معلومات واضحة وموجزة يمكن لكبار السن فهمها؟",
+      trO: [
+        "تقنية الأسئلة المفتوحة",
+        "الأسئلة المباشرة",
+        "الإبلاغ أو التنوير",
+        "الاستماع النشط"
+      ]
+    },
+    {
+      q: "Which communication technique allows a person to express more about their feeling and perception while helping the nurse verify that information exchanged is accurate?",
+      o: [
+        "Informing",
+        "Direct questioning",
+        "Active listening",
+        "Open ended technique"
+      ],
+      a: 3,
+      trQ: "أي تقنية تواصل تسمح للشخص التعبير أكثر عن مشاعره وتصوره بينما تساعد الممرضة في التحقق من دقة المعلومات المتبادلة؟",
+      trO: [
+        "الإبلاغ",
+        "الأسئلة المباشرة",
+        "الاستماع النشط",
+        "تقنية الأسئلة المفتوحة"
+      ]
+    },
+    {
+      q: "What is described as the most accurate form of communication without the use of words?",
+      o: [
+        "Verbal communication",
+        "Nonverbal communication",
+        "Written documentation",
+        "Telephonic conversation"
+      ],
+      a: 1,
+      trQ: "ما الذي يُوصف بأنه الشكل الأكثر دقة للتواصل دون استخدام الكلمات؟",
+      trO: [
+        "التواصل اللفظي",
+        "التواصل غير اللفظي",
+        "التوثيق المكتوب",
+        "المحادثة الهاتفية"
+      ]
+    },
+    {
+      q: "What are the basic components that make up the communication process?",
+      o: [
+        "Source, message, channel, receiver, and feedback",
+        "Diagnosis, treatment, prescription, and recovery",
+        "Planning, implementation, monitoring, and evaluation",
+        "Sender, hospital, physician, nurse, and patient"
+      ],
+      a: 0,
+      trQ: "ما هي المكونات الأساسية التي تشكل عملية التواصل؟",
+      trO: [
+        "المصدر، الرسالة، القناة، المستقبل، والتغذية الراجعة",
+        "التشخيص، العلاج، الوصفة الطبية، والتعافي",
+        "التخطيط، التنفيذ، المتابعة، والتقييم",
+        "المُرسِل، المستشفى، الطبيب، الممرضة، والمريض"
+      ]
+    },
+    {
+      q: "How is the sender defined in the communication process?",
+      o: [
+        "The individual who listens and interprets the message",
+        "The communicator who conveys actions, words and feeling",
+        "The physical environment where interaction occurs",
+        "The written document used for record keeping"
+      ],
+      a: 1,
+      trQ: "كيف يُعرّف المُرسِل في عملية التواصل؟",
+      trO: [
+        "الشخص الذي يستمع ويفسر الرسالة",
+        "المتواصل الذي ينقل الأفعال والكلمات والمشاعر",
+        "البيئة المادية التي يحدث فيها التفاعل",
+        "الوثيقة المكتوبة المستخدمة لحفظ السجلات"
+      ]
+    },
+    {
+      q: "What does the message represent in communication elements?",
+      o: [
+        "The physical distance between sender and receiver",
+        "The financial cost of the healthcare facility",
+        "The information conveyed by the sender",
+        "The medical diagnosis given by a doctor"
+      ],
+      a: 2,
+      trQ: "ماذا تمثل الرسالة في عناصر التواصل؟",
+      trO: [
+        "المسافة الجسدية بين المرسل والمستقبل",
+        "التكلفة المالية لمرفق الرعاية الصحية",
+        "المعلومات التي ينقلها المرسل",
+        "التشخيص الطبي الذي يقدمه الطبيب"
+      ]
+    },
+    {
+      q: "What is another term used for the channel in communication?",
+      o: [
+        "The medium",
+        "The barrier",
+        "The evaluation",
+        "The outcome"
+      ],
+      a: 0,
+      trQ: "ما هو المصطلح الآخر المستخدم للقناة في التواصل؟",
+      trO: [
+        "الوسيط أو الوسط",
+        "الحاجز",
+        "التقييم",
+        "النتيجة"
+      ]
+    },
+    {
+      q: "How is the receiver defined in communication?",
+      o: [
+        "The individual who conveys the initial actions and words",
+        "The physical equipment used for broadcasting data",
+        "The individual who listens and interprets the message",
+        "The administrator managing hospital records"
+      ],
+      a: 2,
+      trQ: "كيف يُعرّف المستقبل في التواصل؟",
+      trO: [
+        "الفرد الذي ينقل الأفعال والكلمات الأولية",
+        "المعدات الجسدية المستخدمة لبث البيانات",
+        "الفرد الذي يستمع ويفسر الرسالة",
+        "المسؤول الذي يدير سجلات المستشفى"
+      ]
+    },
+    {
+      q: "What is the primary function of feedback in communication?",
+      o: [
+        "To enable the sender to determine whether the message was correctly interpreted simply by the receiver",
+        "To increase the financial expenses of the educational program",
+        "To replace the need for sending any messages",
+        "To lengthen the time required for a clinical session"
+      ],
+      a: 0,
+      trQ: "ما هي الوظيفة الأساسية للتغذية الراجعة في التواصل؟",
+      trO: [
+        "تمكين المرسل من تحديد ما إذا كانت الرسالة قد تفسرت بشكل صحيح ببساطة من قبل المستقبل",
+        "زيادة النفقات المالية للبرنامج التعليمي",
+        "استبدال الحاجة لإرسال أي رسائل",
+        "إطالة الوقت المطلوب لجلسة سريرية"
+      ]
+    },
+    {
+      q: "Effective communication requires the message to possess which of the following characteristics?",
+      o: [
+        "Complex, vague, and lengthy",
+        "Clear and concise, accurate, relevant to the needs of the receiver, timely, meaningful, and applicable to the situation",
+        "Confidential, expensive, and technical",
+        "Rigid, permanent, and untranslatable"
+      ],
+      a: 1,
+      trQ: "التواصل الفعال يتطلب أن تمتلك الرسالة أي من الخصائص التالية؟",
+      trO: [
+        "معقدة، غامضة، وطويلة",
+        "واضحة وموجزة، دقيقة، ذات صلة باحتياجات المستقبل، في وقته، ذات معنى، وقابلة للتطبيق على الموقف",
+        "سرية، باهظة الثمن، وتقنية",
+        "جامدة، دائمة، وغير قابلة للترجمة"
+      ]
+    },
+    {
+      q: "What is required of the sender for effective communication to take place?",
+      o: [
+        "To know the subject well, be interested in the subject, know the audience members and establish a rapport with them, speak at the level of the receiver, and choose an appropriate communication channel",
+        "To use complex medical jargon that confuses the audience",
+        "To speak as fast as possible without stopping for feedback",
+        "To avoid interacting directly with the audience members"
+      ],
+      a: 0,
+      trQ: "ما المطلوب من المرسل لكي يحدث التواصل الفعال؟",
+      trO: [
+        "معرفة الموضوع جيداً، الاهتمام بالموضوع، معرفة أعضاء الجمهور وإقامة علاقة معهم، التحدث بمستوى المستقبل، واختيار قناة تواصل مناسبة",
+        "استخدام مصطلحات طبية معقدة تربك الجمهور",
+        "التحدث بأسرع ما يمكن دون التوقف للتغذية الراجعة",
+        "تجنب التفاعل المباشر مع أعضاء الجمهور"
+      ]
+    },
+    {
+      q: "How should the channel be characterized in effective communication?",
+      o: [
+        "Complex and inaccessible",
+        "Appropriate, affordable, and appealing",
+        "Expensive and rigid",
+        "Temporary and secretive"
+      ],
+      a: 1,
+      trQ: "كيف يجب أن تُصنف القناة في التواصل الفعال؟",
+      trO: [
+        "معقدة وغير قابلة للوصول",
+        "مناسبة، ميسورة التكلفة، وجذابة",
+        "باهظة الثمن وجامدة",
+        "مؤقتة وسرية"
+      ]
+    },
+    {
+      q: "What behavioral requirements are expected of the receiver in communication?",
+      o: [
+        "To ignore the message entirely and provide no response",
+        "To be aware, interested, and willing to accept the message, listen attentively, understand the value of the message, and provide feedback",
+        "To criticize the sender without listening",
+        "To walk away before the message is fully conveyed"
+      ],
+      a: 1,
+      trQ: "ما هي المتطلبات السلوكية المتوقعة من المستقبل في التواصل؟",
+      trO: [
+        "تجاهل الرسالة تماماً وعدم تقديم أي استجابة",
+        "أن يكون واعياً، مهتماً، وراغباً في قبول الرسالة، والاستماع باهتمام، وفهم قيمة الرسالة، وتوفير التغذية الراجعة",
+        "انتقاد المرسل دون الاستماع",
+        "الابتعاد قبل اكتمال نقل الرسالة تماماً"
+      ]
+    },
+    {
+      q: "Which of the following actions defines an effective verbal communicator?",
+      o: [
+        "Clarifies, listens, encourages empathically, acknowledges, and restates/repeats",
+        "Interrupts the speaker and argues constantly",
+        "Uses foreign languages exclusively",
+        "Maintains absolute silence throughout the session"
+      ],
+      a: 0,
+      trQ: "أي من الإجراءات التالية يحدد التواصل اللفظي الفعال؟",
+      trO: [
+        "يوضح، يستمع، يشجع بتعاطف، يعترف، ويكرر أو يعيد الصياغة",
+        "يقاطع المتحدث ويجادل باستمرار",
+        "يستخدم اللغات الأجنبية حصرياً",
+        "يحافظ على صمت مطبق طوال الجلسة"
+      ]
+    },
+    {
+      q: "What behaviors characterize an effective nonverbal communicator?",
+      o: [
+        "Relaxes, opens up, leans toward the other person, establishes eye contact, and shows appropriate facial expressions",
+        "Crosses arms tightly and avoids all eye contact",
+        "Turns away and frowns continuously",
+        "Stares blankly without any facial movement"
+      ],
+      a: 0,
+      trQ: "ما هي السلوكيات التي تميز المتواصل غير اللفظي الفعال؟",
+      trO: [
+        "يسترخي، منفتح، يميل نحو الشخص الآخر، يقيم تواصلاً بالعين، ويُظهر تعبيرات وجه مناسبة",
+        "يتقاطع ذراعيه بقوة ويتجنب كل تواصل بالعين",
+        "يدور بعيداً ويقطب جبينه باستمرار",
+        "يحدق ببلادة دون أي حركة في الوجه"
+      ]
+    },
+    {
+      q: "What is the primary role of active listening in communication?",
+      o: [
+        "The nurse pays attention to verbal and nonverbal communication using eye contact and facial expression",
+        "The nurse ignores nonverbal cues completely",
+        "The nurse speaks continuously without pausing",
+        "The nurse records administrative financial data"
+      ],
+      a: 0,
+      trQ: "ما هو الدور الأساسي للاستماع النشط في التواصل؟",
+      trO: [
+        "تولي الممرضة الاهتمام للتواصل اللفظي وغير اللفظي باستخدام التواصل البصري وتعبيرات الوجه",
+        "تتجاهل الممرضة الإشارات غير اللفظية تماماً",
+        "تتحدث الممرضة باستمرار دون توقف",
+        "تسجل الممرضة البيانات المالية الإدارية"
+      ]
+    },
+    {
+      q: "When selecting a communication technique for older adults, what factors should the nurse assess?",
+      o: [
+        "The hospital's financial profits and annual budget",
+        "The elder's age, marital status, educational background, interests, and ability to hear and see",
+        "The local political elections and government laws",
+        "The architectural design of the clinical building"
+      ],
+      a: 1,
+      trQ: "عند اختيار تقنية تواصل للكبار في السن، ما هي العوامل التي يجب على الممرضة تقييمها؟",
+      trO: [
+        "الأرباح المالية للمستشفى والميزانية السنوية",
+        "عمر المسن، حالته الاجتماعية، خلفيته التعليمية، اهتماماته، وقدرته على السمع والرؤية",
+        "الانتخابات السياسية المحلية والقوانين الحكومية",
+        "التصميم المعماري للمبنى السريري"
+      ]
+    },
+    {
+      q: "What does direct questioning help achieve in communication?",
+      o: [
+        "It is helpful when the nurse needs to obtain specific information and is appropriate when information must be obtained quickly",
+        "It is used exclusively for entertainment and storytelling",
+        "It delays clinical assessment indefinitely",
+        "It prevents the receiver from understanding the message"
+      ],
+      a: 0,
+      trQ: "ما الذي يساعد الأسئلة المباشرة في تحقيقها في التواصل؟",
+      trO: [
+        "تكون مفيدة عندما تحتاج الممرضة للحصول على معلومات محددة وتكون مناسبة عندما يجب الحصول على المعلومات بسرعة",
+        "تُستخدم حصرياً للترفيه وروي القصص",
+        "تؤخر التقييم السريري إلى أجل غير مسمى",
+        "تمنع المستقبل من فهم الرسالة"
+      ]
+    },
+    {
+      q: "What does facial expression and body language convey in communication?",
+      o: [
+        "They convey nothing meaningful",
+        "They convey the same message as actions, words and feeling",
+        "They completely contradict verbal statements always",
+        "They serve as administrative penalties"
+      ],
+      a: 1,
+      trQ: "ما الذي تنقله تعبيرات الوجه ولغة الجسد في التواصل؟",
+      trO: [
+        "لا تنقل شيئاً ذا مغزى",
+        "تنقل نفس الرسالة التي تنقلها الأفعال والكلمات والمشاعر",
+        "تتعارض تماماً مع البيانات اللفظية دائماً",
+        "تُعتبر بمثابة عقوبات إدارية"
+      ]
+    },
+    {
+      q: "Why is feedback considered critical in the communication model?",
+      o: [
+        "It allows the sender to know if interpretation was correct",
+        "It increases the physical length of the channel",
+        "It replaces the need for sending messages",
+        "It changes the receiver's identity permanently"
+      ],
+      a: 0,
+      trQ: "لماذا تُعتبر التغذية الراجعة حاسمة في نموذج التواصل؟",
+      trO: [
+        "تسمح للمرسل بمعرفة ما إذا كان التفسير صحيحاً",
+        "تزيد الطول المادي للقناة",
+        "تستبدل الحاجة لإرسال الرسائل",
+        "تغير هوية المستقبل بشكل دائم"
+      ]
+    },
+    {
+      q: "What is a core goal of effective communication in healthcare settings?",
+      o: [
+        "Reaching mutual understanding and encouraging health behavior change",
+        "Increasing institutional paperwork volume",
+        "Restricting patient access to medical staff",
+        "Enforcing legal punishments on patients"
+      ],
+      a: 0,
+      trQ: "ما هو الهدف الأساسي للتواصل الفعال في بيئات الرعاية الصحية؟",
+      trO: [
+        "الوصول إلى التفاهم المتبادل وتشجيع تغيير السلوك الصحي",
+        "زيادة حجم الأعمال الورقية للمؤسسة",
+        "تقييد وصول المريض للطاقم الطبي",
+        "فرض عقوبات قانونية على المرضى"
+      ]
+    },
+    {
+      q: "True or False: Effective communication is the key to changing people's health behavior.",
+      o: ["False", "True"],
+      a: 1,
+      trQ: "صح أم خطأ: التواصل الفعال هو المفتاح لتغيير سلوكيات الناس الصحية.",
+      trO: ["خطأ", "صح"]
+    },
+    {
+      q: "True or False: Communication is necessary in all aspects of health education.",
+      o: ["False", "True"],
+      a: 1,
+      trQ: "صح أم خطأ: التواصل ضروري في جميع جوانب التثقيف الصحي.",
+      trO: ["خطأ", "صح"]
+    },
+    {
+      q: "True or False: Communication process in general is simple and cannot be further complicated by age.",
+      o: ["True", "False"],
+      a: 0,
+      trQ: "صح أم خطأ: عملية التواصل بشكل عام بسيطة ولا يمكن أن تصبح أكثر تعقيداً بسبب العمر.",
+      trO: ["صح", "خطأ"]
+    },
+    {
+      q: "True or False: Communication is a two-way process of reaching mutual understanding.",
+      o: ["False", "True"],
+      a: 1,
+      trQ: "صح أم خطأ: التواصل هو عملية ثنائية الاتجاه للوصول إلى التفاهم المتبادل.",
+      trO: ["خطأ", "صح"]
+    },
+    {
+      q: "True or False: 90% of all communication is verbal and 10% is nonverbal.",
+      o: ["True", "False"],
+      a: 0,
+      trQ: "صح أم خطأ: 90% من إجمالي التواصل هو لفظي و 10% غير لفظي.",
+      trO: ["صح", "خطأ"]
+    },
+    {
+      q: "True or False: Nonverbal communication is the most accurate form of communication without the use of words.",
+      o: ["False", "True"],
+      a: 1,
+      trQ: "صح أم خطأ: التواصل غير اللفظي هو الشكل الأكثر دقة للتواصل دون استخدام الكلمات.",
+      trO: ["خطأ", "صح"]
+    },
+    {
+      q: "True or False: The basic components of communication include source, message, channel, receiver, and feedback.",
+      o: ["False", "True"],
+      a: 1,
+      trQ: "صح أم خطأ: تشمل المكونات الأساسية للتواصل المصدر، الرسالة، القناة، المستقبل، والتغذية الراجعة.",
+      trO: ["خطأ", "صح"]
+    },
+    {
+      q: "True or False: The receiver is the individual who conveys actions, words and feeling.",
+      o: ["True", "False"],
+      a: 0,
+      trQ: "صح أم خطأ: المستقبل هو الفرد الذي ينقل الأفعال والكلمات والمشاعر.",
+      trO: ["صح", "خطأ"]
+    },
+    {
+      q: "True or False: Feedback enables the sender to determine whether the message was correctly interpreted by the receiver.",
+      o: ["False", "True"],
+      a: 1,
+      trQ: "صح أم خطأ: تمكن التغذية الراجعة المرسل من تحديد ما إذا كانت الرسالة قد تم تفسيرها بشكل صحيح من قبل المستقبل.",
+      trO: ["خطأ", "صح"]
+    },
+    {
+      q: "True or False: Effective communication requires the channel to be appropriate, affordable, and appealing.",
+      o: ["False", "True"],
+      a: 1,
+      trQ: "صح أم خطأ: يتطلب التواصل الفعال أن تكون القناة مناسبة وميسورة التكلفة وجذابة.",
+      trO: ["خطأ", "صح"]
+    }
+  ],
+  "place6": [],
+  "place7": [],
+  "place8": [],
+  "place9": [],
+  "place10": [],
+  "place11": [], 
+  "place12": [],
+  "place13": []
+}; 
+
+const STORAGE_PREFIX = "theCodingNurse_health_education_";
+let quiz = []; 
+let answers = []; 
+let i=0, score=0;
+let currentMode = null; 
+let currentDataset = 'place1'; 
+let timerInterval;
+let isReviewMode = false;
+let isComprehensiveExamMode = false;
+
+let soundEnabled = true;
+let vibrationEnabled = true;
+let autoAdvanceTimeout;
+let audioCtx = null; 
+
+const qDiv=document.getElementById("question"),
+      oDiv=document.getElementById("options"),
+      progress=document.getElementById("progressBar"),
+      midNav=document.getElementById("midNav"),
+      quizContainer=document.getElementById("quizContainer"),
+      startCard=document.getElementById("startCard"),
+      resultCard=document.getElementById("resultCard"),
+      scoreText=document.getElementById("scoreText");
+
+function getDatasetLabel(dataset) {
+    if (dataset === 'all') return "الامتحان الشامل";
+    const drawer = document.getElementById("datasetDrawer");
+    if(drawer) {
+        const selectedOption = drawer.querySelector(`option[value="${dataset}"]`);
+        if(selectedOption) return selectedOption.textContent;
+    }
+    return dataset;
+}
+
+function playAudioTone(type) {
+    if(!soundEnabled) return; 
+    try {
+        if (!audioCtx) { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); }
+        if (audioCtx.state === 'suspended') { audioCtx.resume(); }
+        const oscillator = audioCtx.createOscillator();
+        const gainNode = audioCtx.createGain();
+        oscillator.connect(gainNode); gainNode.connect(audioCtx.destination);
+        
+        if(type === 'correct') {
+            oscillator.frequency.setValueAtTime(523.25, audioCtx.currentTime); 
+            oscillator.frequency.setValueAtTime(659.25, audioCtx.currentTime + 0.08); 
+            gainNode.gain.setValueAtTime(0.15, audioCtx.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.25);
+            oscillator.start(); oscillator.stop(audioCtx.currentTime + 0.25);
+        } else if(type === 'wrong') {
+            oscillator.type = 'sawtooth'; oscillator.frequency.setValueAtTime(140, audioCtx.currentTime);
+            gainNode.gain.setValueAtTime(0.15, audioCtx.currentTime); gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.35);
+            oscillator.start(); oscillator.stop(audioCtx.currentTime + 0.35);
+        } else if(type === 'click') {
+            oscillator.frequency.setValueAtTime(380, audioCtx.currentTime); gainNode.gain.setValueAtTime(0.08, audioCtx.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.06);
+            oscillator.start(); oscillator.stop(audioCtx.currentTime + 0.06);
+        }
+    } catch(e) { console.log("Audio issue handled."); }
+}
+
+function triggerHaptic(type) {
+    if (!vibrationEnabled) return; 
+    if (navigator.vibrate) {
+        if (type === 'correct') navigator.vibrate(70);
+        else if (type === 'wrong') navigator.vibrate([100, 60, 100]);
+        else if (type === 'click') navigator.vibrate(35);
+    }
+}
+
+function toggleSound() {
+    soundEnabled = !soundEnabled;
+    document.getElementById("soundToggle").innerHTML = soundEnabled ? "<span>🔊</span> Sound On" : "<span>🔇</span> Sound Off";
+}
+
+function toggleVibration() {
+    vibrationEnabled = !vibrationEnabled;
+    document.getElementById("vibeToggle").innerHTML = vibrationEnabled ? "<span>📳</span> Vibe On" : "<span>📴</span> Vibe Off";
+}
+
+function setMode(mode) { currentMode = mode; showHighScore(); }
+function setDataset(dataset) { currentDataset = dataset; showHighScore(); }
+
+function toggleTheme() {
+  const currentTheme = document.documentElement.getAttribute('data-theme');
+  const targetTheme = currentTheme === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', targetTheme);
+  document.querySelector('.theme-toggle').innerHTML = targetTheme === 'dark' ? '<span>☀️</span> Light Mode' : '<span>🌓</span> Dark Mode';
+}
+
+function prepareQuizData(shouldShuffle) {
+    quiz.forEach(q => {
+        q.combinedOptions = q.o.map((enText, idx) => ({
+            en: enText,
+            ar: q.trO && q.trO[idx] ? q.trO[idx] : ""
+        }));
+    });
+    
+    if(shouldShuffle) {
+        for (let currentIdx = quiz.length - 1; currentIdx > 0; currentIdx--) {
+            const randomIdx = Math.floor(Math.random() * (currentIdx + 1));
+            [quiz[currentIdx], quiz[randomIdx]] = [quiz[randomIdx], quiz[currentIdx]];
+        }
+        quiz.forEach(q => {
+            for (let j = q.combinedOptions.length - 1; j > 0; j--) {
+                const r = Math.floor(Math.random() * (j + 1));
+                [q.combinedOptions[j], q.combinedOptions[r]] = [q.combinedOptions[r], q.combinedOptions[j]];
+            }
+        });
+    }
+}
+
+function startTimer() {
+    clearInterval(timerInterval);
+    let totalSeconds = isComprehensiveExamMode ? Math.min(3600, quiz.length * 36) : quiz.length * 30; 
+    const timerDisplay = document.getElementById("timerDisplay");
+    document.getElementById("timerBox").style.display = "block";
+    
+    function refreshTimerView() {
+        let mins = Math.floor(totalSeconds / 60);
+        let secs = totalSeconds % 60;
+        timerDisplay.textContent = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+    }
+    
+    refreshTimerView();
+    timerInterval = setInterval(() => {
+        totalSeconds--;
+        if(totalSeconds <= 0) { clearInterval(timerInterval); showResult(); } else { refreshTimerView(); }
+    }, 1000);
+}
+
+function getFlaggedTexts() { return JSON.parse(localStorage.getItem(STORAGE_PREFIX + "flagged_questions") || "[]"); }
+
+function speakQuestion() {
+    if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel(); 
+        let structuredText = `Question number ${i + 1}: ${quiz[i].q}. `;
+        quiz[i].combinedOptions.forEach((opObj, idx) => { structuredText += `Choice number ${idx + 1}: ${opObj.en}. `; });
+        const utterance = new SpeechSynthesisUtterance(structuredText);
+        utterance.lang = 'en-US'; utterance.rate = 0.88;
+        utterance.onstart = () => {
+            const stopBtn = document.getElementById("stopSpeakBtn");
+            stopBtn.style.display = "inline-block"; stopBtn.innerHTML = "⏸️";
+        };
+        const resetAudioUI = () => { document.getElementById("stopSpeakBtn").style.display = "none"; };
+        utterance.onend = resetAudioUI; utterance.onerror = resetAudioUI;
+        window.speechSynthesis.speak(utterance);
+    }
+}
+
+function toggleSpeechPause() {
+    if ('speechSynthesis' in window) {
+        const stopBtn = document.getElementById("stopSpeakBtn");
+        if (window.speechSynthesis.speaking) {
+            if (window.speechSynthesis.paused) { window.speechSynthesis.resume(); stopBtn.innerHTML = "⏸️"; } 
+            else { window.speechSynthesis.pause(); stopBtn.innerHTML = "▶️"; }
+        }
+    }
+}
+
+function forceStopSpeechEngine() {
+    if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const stopBtn = document.getElementById("stopSpeakBtn");
+        if (stopBtn) stopBtn.style.display = "none";
+    }
+}
+
+function toggleTranslation() {
+    const tBox = document.getElementById("translationBox");
+    tBox.style.display = (tBox.style.display === "block") ? "none" : "block";
+}
+
+function selectRootMode(rootMode) {
+    const mainMenu = document.getElementById("mainModeMenu");
+    const lecturesSetup = document.getElementById("lecturesSetupContainer");
+    
+    if (rootMode === 'lectures') {
+        mainMenu.style.display = "none";
+        lecturesSetup.style.display = "block";
+        isComprehensiveExamMode = false;
+        checkSavedProgress();
+        showHighScore();
+    } else if (rootMode === 'main') {
+        mainMenu.style.display = "flex";
+        lecturesSetup.style.display = "none";
+        isComprehensiveExamMode = false;
+    } else if (rootMode === 'comprehensive_exam') {
+        isComprehensiveExamMode = true;
+        currentMode = 'exam';
+        startComprehensiveExamSession();
+    }
+}
+
+function startComprehensiveExamSession() {
+    let allMergedQuestions = [];
+    
+    Object.keys(datasets).forEach(key => {
+        if (Array.isArray(datasets[key]) && datasets[key].length > 0) {
+            datasets[key].forEach(q => {
+                allMergedQuestions.push(JSON.parse(JSON.stringify(q)));
+            });
+        }
+    });
+
+    if (allMergedQuestions.length === 0) {
+        alert("لا توجد أسئلة متوفرة في قاعدة البيانات الحالية!");
+        selectRootMode('main');
+        return;
+    }
+
+    const targetExamCount = Math.min(100, allMergedQuestions.length);
+    let examPool = [];
+    try { examPool = JSON.parse(localStorage.getItem(STORAGE_PREFIX + "exam_pool") || "[]"); } catch (e) { examPool = []; }
+
+    const validQuestionTexts = new Set(allMergedQuestions.map(q => q.q));
+    examPool = Array.isArray(examPool) ? examPool.filter(q => validQuestionTexts.has(q.q)) : [];
+
+    const savedTotalCount = parseInt(localStorage.getItem(STORAGE_PREFIX + "exam_pool_total") || "0", 10);
+    if (savedTotalCount !== allMergedQuestions.length || examPool.length < targetExamCount) {
+        examPool = [...allMergedQuestions];
+        for (let idx = examPool.length - 1; idx > 0; idx--) {
+            const randomIdx = Math.floor(Math.random() * (idx + 1));
+            [examPool[idx], examPool[randomIdx]] = [examPool[randomIdx], examPool[idx]];
+        }
+        localStorage.setItem(STORAGE_PREFIX + "exam_pool_total", String(allMergedQuestions.length));
+    }
+
+    quiz = examPool.slice(0, targetExamCount);
+    let remainingPool = examPool.slice(targetExamCount);
+    localStorage.setItem(STORAGE_PREFIX + "exam_pool", JSON.stringify(remainingPool));
+
+    quiz.forEach(q => {
+        q.combinedOptions = q.o.map((enText, idx) => ({
+            en: enText,
+            ar: q.trO && q.trO[idx] ? q.trO[idx] : ""
+        }));
+        for (let j = q.combinedOptions.length - 1; j > 0; j--) {
+            const r = Math.floor(Math.random() * (j + 1));
+            [q.combinedOptions[j], q.combinedOptions[r]] = [q.combinedOptions[r], q.combinedOptions[j]];
+        }
+    });
+
+    answers = new Array(quiz.length).fill(null);
+    i = 0; score = 0;
+    localStorage.removeItem(STORAGE_PREFIX + "quiz_progress");
+
+    midNav.innerHTML = "";
+    quiz.forEach((_, idx) => {
+      const b = document.createElement("button");
+      b.textContent = idx + 1; b.className = "q-btn";
+      b.onclick = () => { i = idx; load(); };
+      midNav.appendChild(b);
+    });
+
+    startCard.style.display = "none"; 
+    quizContainer.style.display = "block";
+    startTimer();
+    load();
+}
+
+function startQuiz() {
+    if (!currentMode) {
+        alert("⚠️ من فضلك اختر وضع الاختبار أولاً!");
+        return;
+    }
+
+    let selectedBank = [];
+
+    if (currentDataset === 'all') {
+        Object.keys(datasets).forEach(key => {
+            if (Array.isArray(datasets[key]) && datasets[key].length > 0) {
+                selectedBank = selectedBank.concat(datasets[key]);
+            }
+        });
+        selectedBank = JSON.parse(JSON.stringify(selectedBank));
+    } else {
+        selectedBank = JSON.parse(JSON.stringify(datasets[currentDataset] || []));
+    }
+
+    if(selectedBank.length === 0) {
+        alert("لا توجد أسئلة متوفرة في هذا القسم حالياً!");
+        return;
+    }
+
+    if (currentMode === 'bookmark') {
+        let flagged = getFlaggedTexts();
+        quiz = selectedBank.filter(q => flagged.includes(q.q));
+        if (quiz.length === 0) {
+            alert("❌ لا توجد أسئلة مميزة بـ 🔖 في هذا القسم!");
+            return;
+        }
+        prepareQuizData(false);
+        localStorage.removeItem(STORAGE_PREFIX + "quiz_progress");
+    } else if(!isReviewMode) {
+        quiz = selectedBank;
+        let doShuffle = (currentMode !== 'sequential' && currentMode !== 'memorize');
+        prepareQuizData(doShuffle); 
+        localStorage.removeItem(STORAGE_PREFIX + "quiz_progress"); 
+    }
+    answers = new Array(quiz.length).fill(null);
+    
+    midNav.innerHTML = "";
+    quiz.forEach((_, idx) => {
+      const b = document.createElement("button");
+      b.textContent = idx + 1; b.className = "q-btn";
+      b.onclick = () => { i = idx; load(); };
+      midNav.appendChild(b);
+    });
+
+    startCard.style.display = "none"; quizContainer.style.display = "block";
+    if(currentMode === 'exam') { startTimer(); } else { document.getElementById("timerBox").style.display = "none"; }
+    load();
+}
+
+function updateMidNav(){
+  let flagged = getFlaggedTexts();
+  document.querySelectorAll(".q-btn").forEach((el,idx)=>{
+    el.classList.remove("active","correct","wrong","answered-exam","flagged");
+    if(idx===i) el.classList.add("active");
+    if(quiz[idx] && flagged.includes(quiz[idx].q)) el.classList.add("flagged");
+    
+    if(quiz[idx] && quiz[idx].userPick !== undefined) {
+        if(isComprehensiveExamMode || currentMode === 'exam') { 
+            el.classList.add("answered-exam"); 
+        } else if(currentMode === 'study' || currentMode === 'sequential' || currentMode === 'bookmark' || currentMode === 'memorize') {
+            if(answers[idx]===true) el.classList.add("correct");
+            if(answers[idx]===false) el.classList.add("wrong");
+        }
+    }
+  });
+}
+
+function toggleFlag() {
+    if(quiz[i]) {
+        let flagged = getFlaggedTexts();
+        const qText = quiz[i].q;
+        if(flagged.includes(qText)) {
+            flagged = flagged.filter(t => t !== qText); quiz[i].isFlagged = false;
+        } else {
+            flagged.push(qText); quiz[i].isFlagged = true;
+        }
+        localStorage.setItem(STORAGE_PREFIX + "flagged_questions", JSON.stringify(flagged));
+        document.getElementById("flagBtn").classList.toggle("active", quiz[i].isFlagged);
+        updateMidNav(); saveProgress();
+    }
+}
+
+function load(){
+  if(quiz.length === 0) return;
+  clearTimeout(autoAdvanceTimeout); forceStopSpeechEngine(); 
+  document.getElementById("translationBox").style.display = "none";
+
+  const qCard = document.getElementById("quizCard");
+  qCard.style.animation = 'none'; qCard.offsetHeight; 
+  qCard.style.animation = 'popIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)';
+
+  let qText = quiz[i].q;
+  if (currentMode === 'memorize' && quiz[i].kw) {
+      const safeKw = quiz[i].kw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const regex = new RegExp(`(${safeKw})`, 'gi');
+      qText = qText.replace(regex, `<span class="kw-highlight">$1</span>`);
+  }
+  
+  qDiv.innerHTML = qText;
+  document.getElementById("qIndexBadge").textContent = `Q: ${i + 1} / ${quiz.length}`;
+  
+  const correctIdx = quiz[i].combinedOptions.findIndex(opt => opt.en === quiz[i].o[quiz[i].a]);
+  const transBtn = document.getElementById("translateBtn");
+  
+  if(quiz[i].trQ) {
+      transBtn.style.display = "inline-block";
+      document.getElementById("transQText").textContent = quiz[i].trQ;
+      const transOList = document.getElementById("transOList"); transOList.innerHTML = "";
+      quiz[i].combinedOptions.forEach(optObj => {
+          if(optObj.ar) { const li = document.createElement("li"); li.textContent = optObj.ar; transOList.appendChild(li); }
+      });
+  } else { transBtn.style.display = "none"; }
+  
+  let flagged = getFlaggedTexts();
+  quiz[i].isFlagged = flagged.includes(quiz[i].q);
+  document.getElementById("flagBtn").classList.toggle("active", !!quiz[i].isFlagged);
+  
+  oDiv.innerHTML=""; progress.style.width=((i+1)/quiz.length)*100+"%"; updateMidNav();
+  
+  quiz[i].combinedOptions.forEach((opObj,idx)=>{
+    const b = document.createElement("button"); b.textContent = opObj.en;
+    
+    if (currentMode === 'memorize' && quiz[i].userPick === undefined) {
+        if (idx === correctIdx) { b.classList.add("correct"); b.style.borderWidth = "3px"; } 
+        else { b.style.opacity = "0.4"; b.disabled = true; }
+    }
+    if(quiz[i].userPick !== undefined) {
+        b.disabled=true;
+        if(isComprehensiveExamMode) {
+            if(idx === quiz[i].userPick) b.classList.add("selected-exam");
+        } else if(currentMode === 'study' || currentMode === 'sequential' || currentMode === 'bookmark' || currentMode === 'memorize') {
+            if(idx===correctIdx) b.classList.add("correct");
+            else if(idx === quiz[i].userPick) b.classList.add("wrong");
+        } else { if(idx === quiz[i].userPick) b.classList.add("selected-exam"); }
+    }
+    b.onclick=()=>answer(idx,b); oDiv.appendChild(b);
+  });
+}
+
+function answer(idx,btn){
+  if(quiz[i].userPick !== undefined) return;
+  quiz[i].userPick = idx;
+  document.querySelectorAll(".options button").forEach(b=>b.disabled=true);
+  const correctIdx = quiz[i].combinedOptions.findIndex(opt => opt.en === quiz[i].o[quiz[i].a]);
+  
+  if(isComprehensiveExamMode) {
+      btn.classList.add("selected-exam"); playAudioTone('click'); triggerHaptic('click');
+      autoAdvanceTimeout = setTimeout(() => { nextQ(); }, 150);
+  } else if(currentMode === 'study' || currentMode === 'sequential' || currentMode === 'bookmark' || currentMode === 'memorize') {
+      if(idx===correctIdx){
+        btn.classList.add("correct"); answers[i]=true; score++;
+        playAudioTone('correct'); triggerHaptic('correct');
+        autoAdvanceTimeout = setTimeout(() => { nextQ(); }, 1200); 
+      }else{
+        btn.classList.add("wrong"); btn.classList.add("shake-anim"); 
+        oDiv.children[correctIdx].classList.add("correct"); answers[i]=false;
+        playAudioTone('wrong'); triggerHaptic('wrong');
+      }
+  } else { btn.classList.add("selected-exam"); playAudioTone('click'); triggerHaptic('click'); }
+  updateMidNav(); saveProgress();
+}
+
+function nextQ(){ if(i<quiz.length-1){i++;load()} else showResult(); }
+function prevQ(){ if(i>0){i--;load()} }
+
+function goToHome() {
+    clearInterval(timerInterval); forceStopSpeechEngine(); saveProgress(); 
+    quizContainer.style.display = "none"; startCard.style.display = "block";
+    isReviewMode = false;
+    
+    if(isComprehensiveExamMode) { selectRootMode('main'); } else { selectRootMode('lectures'); }
+}
+
+function saveProgress() {
+    if(isReviewMode || isComprehensiveExamMode) return; 
+    const dataToSave = { quiz: quiz, answers: answers, i: i, score: score, currentMode: currentMode, currentDataset: currentDataset };
+    localStorage.setItem(STORAGE_PREFIX + "quiz_progress", JSON.stringify(dataToSave));
+}
+
+function checkSavedProgress() {
+    if(localStorage.getItem(STORAGE_PREFIX + "quiz_progress") && !isComprehensiveExamMode) { document.getElementById("resumeBtn").style.display = "block"; } 
+    else { document.getElementById("resumeBtn").style.display = "none"; }
+}
+
+function showHighScore() {
+    if (!currentMode) {
+        document.getElementById("highScoreView").style.display = "none";
+        return;
+    }
+    let modeKey = isComprehensiveExamMode ? STORAGE_PREFIX + "high_score_comprehensive" : STORAGE_PREFIX + "high_score_" + currentDataset + "_" + currentMode;
+    let highScore = localStorage.getItem(modeKey);
+    const hsView = document.getElementById("highScoreView");
+    if(highScore !== null) {
+        let modeName = "";
+        if(isComprehensiveExamMode) modeName = "(الامتحان الشامل)";
+        else if(currentMode === 'sequential') modeName = "(الترتيب)";
+        else if(currentMode === 'study') modeName = "(المذاكرة)";
+        else if(currentMode === 'exam') modeName = "(الامتحان)";
+        else if(currentMode === 'bookmark') modeName = "(المميزة)";
+        else if(currentMode === 'memorize') modeName = "(البصمجة)";
+        
+        document.getElementById("highScoreVal").textContent = isComprehensiveExamMode ? highScore + "% " + modeName : highScore + "% " + modeName + " - " + getDatasetLabel(currentDataset);
+        hsView.style.display = "block";
+    } else { hsView.style.display = "none"; }
+}
+
+function resumeQuiz() {
+    const savedData = localStorage.getItem(STORAGE_PREFIX + "quiz_progress");
+    if(!savedData) return;
+    const parsedData = JSON.parse(savedData);
+    quiz = parsedData.quiz; answers = parsedData.answers; i = parsedData.i; score = parsedData.score; currentMode = parsedData.currentMode; currentDataset = parsedData.currentDataset || 'place1';
+    isComprehensiveExamMode = false;
+
+    document.querySelectorAll('input[name="quizMode"]').forEach(radio => { if(radio.value === currentMode) radio.checked = true; });
+    if(document.getElementById("datasetDrawer")) document.getElementById("datasetDrawer").value = currentDataset;
+    
+    midNav.innerHTML = "";
+    quiz.forEach((_, idx) => {
+      const b = document.createElement("button"); b.textContent = idx + 1; b.className = "q-btn";
+      b.onclick = () => { i = idx; load(); }; midNav.appendChild(b);
+    });
+    startCard.style.display = "none"; quizContainer.style.display = "block";
+    if(currentMode === 'exam') { startTimer(); } else { document.getElementById("timerBox").style.display = "none"; }
+    load();
+}
+
+function showResult(){
+  clearInterval(timerInterval); forceStopSpeechEngine();
+  localStorage.removeItem(STORAGE_PREFIX + "quiz_progress"); 
+  document.getElementById("timerBox").style.display = "none";
+  quizContainer.style.display="none"; resultCard.style.display="block";
+  
+  if(currentMode === 'exam' || isComprehensiveExamMode) {
+      score = 0;
+      quiz.forEach((q) => { 
+          const correctIdx = q.combinedOptions.findIndex(opt => opt.en === q.o[q.a]);
+          if(q.userPick === correctIdx) score++; 
+      });
+  }
+  const wrongCount = quiz.length - score;
+  const accuracyRatio = Math.round((score / quiz.length) * 100);
+  
+  if (!isReviewMode) {
+      let modeKey = isComprehensiveExamMode ? STORAGE_PREFIX + "high_score_comprehensive" : STORAGE_PREFIX + "high_score_" + currentDataset + "_" + currentMode;
+      let savedHighScore = parseInt(localStorage.getItem(modeKey)) || 0;
+      if(!isNaN(accuracyRatio) && accuracyRatio > savedHighScore) { localStorage.setItem(modeKey, accuracyRatio); }
+  }
+  
+  document.getElementById("statCorrect").textContent = score;
+  document.getElementById("statWrong").textContent = wrongCount;
+  document.getElementById("statRatio").textContent = isNaN(accuracyRatio) ? "0%" : accuracyRatio + "%";
+  scoreText.textContent=`${score} / ${quiz.length}`;
+  
+  const bTitle = document.getElementById("badgeTitle");
+  if(accuracyRatio >= 95) bTitle.textContent = "👑 Master of Health Education";
+  else if(accuracyRatio >= 80) bTitle.textContent = "📚 Health Education Hero";
+  else if(accuracyRatio >= 50) bTitle.textContent = "💡 Smart Educator";
+  else bTitle.textContent = "💪 Keep Fighting, Future Educator";
+  
+  document.getElementById("reviewBtn").style.display = wrongCount > 0 ? "inline-block" : "none";
+  if(score >= (quiz.length / 2) && quiz.length > 0) {
+    var duration = 3 * 1000; var end = Date.now() + duration;
+    (function frame() {
+      confetti({ particleCount: 4, angle: 60, spread: 55, origin: { x: 0, y: 0.7 } });
+      confetti({ particleCount: 4, angle: 120, spread: 55, origin: { x: 1, y: 0.7 } });
+      if (Date.now() < end) { requestAnimationFrame(frame); }
+    }());
+  }
+}
+
+function startReview() {
+    let wrongQuestions = quiz.filter(q => {
+        const correctIdx = q.combinedOptions.findIndex(opt => opt.en === q.o[q.a]);
+        return q.userPick !== correctIdx;
+    });
+    if(wrongQuestions.length === 0) return;
+    quiz = JSON.parse(JSON.stringify(wrongQuestions));
+    quiz.forEach(q => { delete q.userPick; delete q.isFlagged; }); 
+    isReviewMode = true; i = 0; score = 0; currentMode = 'study';
+    prepareQuizData(false); resultCard.style.display = "none"; startQuiz();
+}
+
+function downloadResultCard() {
+    const dBtn = document.getElementById("downloadBtn");
+    const containerActionButtons = document.querySelector(".result-actions-container");
+    dBtn.textContent = "⏳ Generating Image..."; dBtn.disabled = true;
+    containerActionButtons.style.display = "none"; 
+    const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+    const bgColor = currentTheme === 'dark' ? '#0f172a' : '#f1f5f9';
+    
+    html2canvas(document.querySelector(".container"), {
+        backgroundColor: bgColor, scale: 2, useCORS: true, allowTaint: true,
+        onclone: (clonedDoc) => { clonedDoc.documentElement.setAttribute('data-theme', currentTheme); }
+    }).then(canvas => {
+        const downloadLink = document.createElement("a"); downloadLink.download = `TheCodingNurse_HealthEducation_Score.png`;
+        downloadLink.href = canvas.toDataURL("image/png"); downloadLink.click();
+        containerActionButtons.style.display = "flex"; dBtn.textContent = "📸 تحميل النتيجة كصورة"; dBtn.disabled = false;
+    }).catch(err => {
+        containerActionButtons.style.display = "flex"; dBtn.textContent = "📸 تحميل النتيجة كصورة"; dBtn.disabled = false;
+    });
+}
+
+function restartQuiz(){
+  i=0; score=0; isReviewMode = false; clearInterval(timerInterval); forceStopSpeechEngine();
+  localStorage.removeItem(STORAGE_PREFIX + "quiz_progress");
+  document.getElementById("resumeBtn").style.display = "none";
+  resultCard.style.display="none"; startCard.style.display="block";
+  selectRootMode('main');
+}
+
+window.onload = function() { 
+    const drawer = document.getElementById("datasetDrawer");
+    if(drawer) { currentDataset = drawer.value || 'place1'; }
+    selectRootMode('main'); 
+};
+</script>
+</body>
+</html>
